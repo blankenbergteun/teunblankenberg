@@ -110,10 +110,6 @@ dialog::backdrop{background:rgba(19,38,60,.94)}
 .about .text{grid-column:7/12;padding-top:2vw}
 .about .text h1,.about .text h2{margin-bottom:32px}
 .about .text p{max-width:42ch;margin-bottom:1.1em}
-.about .text h2.tussenkop{font-size:clamp(30px,3.4vw,44px);margin:44px 0 16px}
-.weg{list-style:none;border-top:1px solid var(--line)}
-.weg li{display:grid;grid-template-columns:7em 1fr;gap:16px;padding:11px 0;border-bottom:1px solid var(--line);font-size:15px}
-.weg span{font:400 13px/1.6 var(--type);color:var(--mist)}
 .facts{margin-top:40px;border-top:1px solid var(--line)}
 .facts div{display:grid;grid-template-columns:7em 1fr;gap:16px;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px}
 .facts dt{color:var(--mist);font:400 13px/1.6 var(--type)}
