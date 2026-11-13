@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Beheer | Teun Blankenberg</title>
+<style>
+@font-face{font-family:"Jacobs Doodles";font-display:swap;src:url(../assets/fonts/jacobs-doodles.woff2) format("woff2")}
+@font-face{font-family:"Jacobs Doodles";font-display:swap;src:url(../assets/fonts/jacobs-doodles-T.woff2) format("woff2");unicode-range:U+0054}
+@font-face{font-family:"Alte Haas Grotesk";font-display:swap;src:url(../assets/fonts/alte-haas-grotesk-regular.woff2) format("woff2")}
+@font-face{font-family:"Courier Prime";font-display:swap;src:url(../assets/fonts/courier-prime-400.woff2) format("woff2")}
+:root{--snow:#F4F2EF;--navy:#213E60;--signal:#E68C3A;--line:#DAD4CA;--slate:#4A6283;--mist:#7A8AA0;--rood:#B3402A;--groen:#2F6B4F;
+  --hand:"Jacobs Doodles",sans-serif;--body:"Alte Haas Grotesk","Helvetica Neue",Arial,sans-serif;--type:"Courier New","Courier Prime",monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--snow);color:var(--navy);font:400 16px/1.5 var(--body);padding:0 clamp(16px,4vw,48px) 80px}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+header{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid var(--line);margin-bottom:32px}
+header h1{font:400 30px/1 var(--hand)}
+header nav{display:flex;gap:18px;font-size:14px;align-items:center}
+h2{font:400 34px/1.1 var(--hand);margin-bottom:16px}
+.klein{font:400 13px/1.5 var(--type);color:var(--slate)}
+.knop{font:400 15px/1 var(--body);background:var(--navy);color:var(--snow);border:0;padding:12px 18px;cursor:pointer;text-decoration:none;display:inline-block}
+.knop.oranje{background:var(--signal);color:var(--navy)}
+.knop.licht{background:transparent;color:var(--navy);border:1px solid var(--navy)}
+.knop.mini{padding:6px 10px;font-size:13px}
+.knop:disabled{opacity:.45;cursor:default}
+.knop.gevaar{background:transparent;color:var(--rood);border:1px solid var(--rood)}
+[hidden]{display:none!important}
+
+/* inloggen */
+.login{max-width:560px}
+.login ol{margin:14px 0 18px 1.2em}
+.login li{margin-bottom:8px}
+label{display:block;font:400 13px/1.4 var(--type);color:var(--slate);margin-bottom:6px}
+input[type=text],input[type=password],input[type=url],textarea,select{width:100%;font:inherit;color:var(--navy);background:#fff;border:1px solid var(--line);padding:10px 12px;border-radius:0}
+textarea{min-height:90px;resize:vertical;line-height:1.5}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 1px var(--navy)}
+
+/* lijst */
+.balk{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:16px;flex-wrap:wrap}
+.lijst{list-style:none;border-top:1px solid var(--line)}
+.rij{display:grid;grid-template-columns:64px 1fr auto;gap:16px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.rij .duim{width:64px;aspect-ratio:4/5;background:var(--line) center/cover no-repeat}
+.rij b{font-weight:400;font-size:17px;display:block}
+.vlag{display:inline-block;font:400 11px/1 var(--type);border:1px solid var(--mist);color:var(--slate);padding:3px 5px;margin-right:4px}
+.vlag.aan{background:var(--navy);color:var(--snow);border-color:var(--navy)}
+.rij .acties{display:flex;gap:6px;flex-wrap:wrap;justify-content:end}
+
+/* formulier */
+.form{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px 28px;max-width:1100px}
+.vol{grid-column:1/-1}
+.keuze{display:flex;gap:18px;align-items:center;font-size:15px}
+.keuze label{display:flex;gap:6px;align-items:center;font:inherit;color:inherit;margin:0}
+.media{display:grid;grid-template-columns:240px 1fr;gap:20px;align-items:start;background:#fff;border:1px solid var(--line);padding:16px}
+.voorbeeld{width:240px;aspect-ratio:4/5;background:var(--line);overflow:hidden;position:relative}
+.voorbeeld img,.voorbeeld video{width:100%;height:100%;object-fit:cover;display:block}
+.posterkies{margin-top:12px}
+.posterkies input[type=range]{width:100%}
+.hint{font:400 13px/1.5 var(--type);color:var(--mist);margin-top:6px}
+.knoppen{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.status{font:400 14px/1.5 var(--type);padding:12px 14px;margin:18px 0;border-left:3px solid var(--navy);background:#fff}
+.status.fout{border-color:var(--rood);color:var(--rood)}
+.status.goed{border-color:var(--groen);color:var(--groen)}
+@media (max-width:760px){
+  .form{grid-template-columns:1fr}
+  .media{grid-template-columns:1fr}
+  .voorbeeld{width:100%;max-width:300px}
+  .rij{grid-template-columns:48px 1fr}
+  .rij .duim{width:48px}
+  .rij .acties{grid-column:1/-1;justify-content:start}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Beheer portfolio</h1>
+  <nav><a href="../portfolio/" target="_blank" rel="noopener">Bekijk de site</a><button class="knop licht mini" id="uitloggen" hidden>Uitloggen</button></nav>
+</header>
+
+<div class="status" id="status" hidden role="status"></div>
+
+<!-- ============ INLOGGEN ============ -->
+<section class="login" id="v-login" hidden>
+  <h2>Inloggen</h2>
+  <p>Deze pagina zet je wijzigingen rechtstreeks op GitHub. Daarvoor heb je een sleutel (token) nodig. Die maak je één keer aan:</p>
+  <ol>
+    <li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com → nieuwe fine-grained token</a>.</li>
+    <li>Naam: <i>Beheer website</i>. Vervaldatum: bijvoorbeeld 1 jaar.</li>
+    <li>Repository access: <b>Only select repositories</b> → <b>teunblankenberg</b>.</li>
+    <li>Permissions → Repository permissions → <b>Contents: Read and write</b>.</li>
+    <li>Klik op <b>Generate token</b> en plak de code hieronder.</li>
+  </ol>
+  <label for="token">Token</label>
+  <input type="password" id="token" autocomplete="off" placeholder="github_pat_…">
+  <p class="hint">De token wordt alleen in deze browser bewaard.</p>
+  <p style="margin-top:16px"><button class="knop" id="inloggen">Inloggen</button></p>
+</section>
+
+<!-- ============ LIJST ============ -->
+<section id="v-lijst" hidden>
+  <div class="balk">
+    <div>
+      <h2>Portfolio</h2>
+      <p class="klein">Volgorde hier = volgorde op de site. <b>Opening</b> = filmwand bovenaan de homepage (4 films). <b>Home</b> = onder "Uit het portfolio" (4 stuks).</p>
+    </div>
+    <button class="knop oranje" id="nieuw">Nieuw item</button>
+  </div>
+  <ol class="lijst" id="lijst"></ol>
+  <p style="margin-top:18px" class="knoppen">
+    <button class="knop" id="volgorde-opslaan" disabled>Volgorde en vinkjes opslaan</button>
+    <span class="klein" id="volgorde-info"></span>
+  </p>
+</section>
+
+<!-- ============ FORMULIER ============ -->
+<section id="v-form" hidden>
+  <div class="balk">
+    <h2 id="form-kop">Nieuw item</h2>
+    <button class="knop licht" id="terug">Terug naar de lijst</button>
+  </div>
+  <form class="form" id="form" autocomplete="off">
+    <div class="vol keuze" role="radiogroup" aria-label="Soort">
+      <label><input type="radio" name="soort" value="foto" checked> Foto</label>
+      <label><input type="radio" name="soort" value="film"> Film</label>
+    </div>
+
+    <div class="vol media">
+      <div>
+        <div class="voorbeeld" id="voorbeeld"></div>
+      </div>
+      <div>
+        <label for="bestand" id="bestand-label">Foto (JPG of PNG)</label>
+        <input type="file" id="bestand" accept="image/*">
+        <p class="hint" id="bestand-hint">Wordt automatisch verkleind tot 1800 pixels breed.</p>
+        <div class="posterkies" id="posterkies" hidden>
+          <label for="poster-tijd">Kies het stilstaande beeld (poster)</label>
+          <input type="range" id="poster-tijd" min="0" max="100" step="0.1" value="0">
+          <p class="hint">Schuif naar het mooiste moment, meestal het eindgerecht. Dit beeld zie je terwijl de film laadt.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="vol"><label for="titel">Titel</label><input type="text" id="titel" required placeholder="Tortellini met flespompoen, marjoraan en mascarpone"></div>
+    <div class="vol"><label for="tekst">Korte tekst (onder het beeld in het portfolio)</label><textarea id="tekst" rows="3" placeholder="Wat zie je, in 1 à 3 zinnen."></textarea></div>
+    <div><label for="waar">Gelegenheid of plek</label><input type="text" id="waar" placeholder="Bruiloft in Hemmen, 80 gasten / Uit mijn keuken"></div>
+    <div><label for="instagram">Link naar Instagram (optioneel)</label><input type="url" id="instagram" placeholder="https://www.instagram.com/reel/…"></div>
+
+    <div class="vol"><h2 style="margin:12px 0 0">Receptpagina</h2><p class="klein">Alles hieronder is optioneel. Zonder ingrediënten en bereiding staat er "Het volledige recept volgt binnenkort".</p></div>
+    <div class="vol"><label for="verhaal">Verhaal (laat een lege regel tussen alinea's)</label><textarea id="verhaal" rows="5"></textarea></div>
+    <div><label for="porties">Porties</label><input type="text" id="porties" placeholder="Voor 4 personen"></div>
+    <div><label for="tijd">Tijd</label><input type="text" id="tijd" placeholder="1 uur, plus een nacht rijzen"></div>
+    <div><label for="ingredienten">Ingrediënten (één per regel, # voor een tussenkopje)</label><textarea id="ingredienten" rows="10" placeholder="# Deeg&#10;300 g tipo 00&#10;3 eieren&#10;# Vulling&#10;500 g flespompoen"></textarea></div>
+    <div><label for="bereiding">Bereiding (één stap per regel)</label><textarea id="bereiding" rows="10" placeholder="Rooster de pompoen 40 minuten op 200 °C.&#10;Maak het deeg…"></textarea></div>
+
+    <div class="vol keuze">
+      <label><input type="checkbox" id="hero"> Op de opening (filmwand, alleen films)</label>
+      <label><input type="checkbox" id="uitgelicht"> Op de homepage</label>
+    </div>
+
+    <div class="vol knoppen">
+      <button class="knop oranje" type="submit" id="opslaan">Opslaan en publiceren</button>
+      <button class="knop gevaar" type="button" id="verwijder" hidden>Verwijderen</button>
+      <span class="klein">Na publiceren staat het binnen 1 à 2 minuten op de site.</span>
+    </div>
+  </form>
+</section>
+
+<script>
+/* ===================== Instellingen ===================== */
+const REPO = 'blankenbergteun/teunblankenberg', TAK = 'main';
+const DATA = 'data/portfolio.json', MAP = 'assets/portfolio/';
+const API = 'https://api.github.com/repos/' + REPO;
+const SITE = '../';
+
+/* ===================== Hulpjes ===================== */
+const $ = id => document.getElementById(id);
+const opslag = {
+  get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } },
+  set(k,v){ try { localStorage.setItem(k,v); } catch(e){} },
+  del(k){ try { localStorage.removeItem(k); } catch(e){} }
+};
+let TOKEN = opslag.get('tb-beheer-token') || '';
+let LIJST = [], gewijzigd = false, bewerkIndex = -1;
+let nieuwBestand = null, nieuwPoster = null; // {naam, blob}
+
+function melding(tekst, soort){
+  const s = $('status'); s.hidden = !tekst; s.textContent = tekst || ''; s.className = 'status' + (soort ? ' ' + soort : '');
+  if (tekst) s.scrollIntoView({block:'nearest'});
+}
+function toon(v){ ['v-login','v-lijst','v-form'].forEach(x => $(x).hidden = x !== v); $('uitloggen').hidden = v === 'v-login'; }
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function slugVan(t){
+  return String(t).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'')
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,60) || 'item';
+}
+const basis = b => String(b||'').replace(/\.[^.]+$/,'');
+const media = f => SITE + MAP + f;
+
+/* ===================== GitHub ===================== */
+async function gh(pad, opties = {}){
+  const res = await fetch(API + pad, {...opties, headers:{'Authorization':'Bearer ' + TOKEN,'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28', ...(opties.body ? {'Content-Type':'application/json'} : {})}});
+  if (!res.ok) {
+    let msg = res.status + ' ' + res.statusText;
+    try { const j = await res.json(); if (j.message) msg = j.message; } catch(e){}
+    if (res.status === 401) msg = 'De token klopt niet of is verlopen. Log opnieuw in.';
+    if (res.status === 403 || res.status === 404) msg += ' (heeft de token "Contents: Read and write" voor teunblankenberg?)';
+    throw new Error(msg);
+  }
+  return res.status === 204 ? null : res.json();
+}
+function naarBase64(blob){
+  return new Promise((ok, fout) => { const r = new FileReader(); r.onload = () => ok(String(r.result).split(',')[1]); r.onerror = fout; r.readAsDataURL(blob); });
+}
+const tekstNaarBase64 = t => naarBase64(new Blob([t], {type:'application/json'}));
+
+async function laadLijst(){
+  const j = await gh('/contents/' + DATA + '?ref=' + TAK);
+  const bytes = Uint8Array.from(atob(j.content.replace(/\n/g,'')), c => c.charCodeAt(0));
+  LIJST = JSON.parse(new TextDecoder().decode(bytes));
+}
+
+/* Eén commit met alle bestanden: bestanden = [{pad, blob} | {pad, verwijder:true}] */
+async function publiceer(bericht, bestanden){
+  const ref = await gh('/git/ref/heads/' + TAK);
+  const vorige = ref.object.sha;
+  const commit = await gh('/git/commits/' + vorige);
+  const boom = [];
+  for (const b of bestanden) {
+    if (b.verwijder) { boom.push({path:b.pad, mode:'100644', type:'blob', sha:null}); continue; }
+    melding('Uploaden: ' + b.pad.split('/').pop() + ' (' + Math.round(b.blob.size/1024) + ' kB)…');
+    const blob = await gh('/git/blobs', {method:'POST', body: JSON.stringify({content: await naarBase64(b.blob), encoding:'base64'})});
+    boom.push({path:b.pad, mode:'100644', type:'blob', sha:blob.sha});
+  }
+  melding('Publiceren…');
+  const tree = await gh('/git/trees', {method:'POST', body: JSON.stringify({base_tree: commit.tree.sha, tree: boom})});
+  const nieuw = await gh('/git/commits', {method:'POST', body: JSON.stringify({message: bericht, tree: tree.sha, parents:[vorige]})});
+  await gh('/git/refs/heads/' + TAK, {method:'PATCH', body: JSON.stringify({sha: nieuw.sha})});
+}
+const jsonBlob = () => new Blob([JSON.stringify(LIJST, null, 2) + '\n'], {type:'application/json'});
+
+/* ===================== Inloggen ===================== */
+async function start(){
+  if (!TOKEN) { toon('v-login'); return; }
+  try {
+    melding('Portfolio laden…');
+    await laadLijst();
+    melding('');
+    tekenLijst(); toon('v-lijst');
+  } catch(e) {
+    melding(e.message, 'fout'); toon('v-login');
+  }
+}
+$('inloggen').onclick = () => { TOKEN = $('token').value.trim(); if (!TOKEN) return; opslag.set('tb-beheer-token', TOKEN); start(); };
+$('token').addEventListener('keydown', e => { if (e.key === 'Enter') $('inloggen').click(); });
+$('uitloggen').onclick = () => { opslag.del('tb-beheer-token'); TOKEN = ''; melding(''); toon('v-login'); };
+
+/* ===================== Lijst ===================== */
+function tekenLijst(){
+  const ol = $('lijst'); ol.innerHTML = '';
+  LIJST.forEach((it, i) => {
+    const duim = it.soort === 'film' ? (it.poster ? media(it.poster) : '') : media(it.bestand);
+    const li = document.createElement('li'); li.className = 'rij';
+    li.innerHTML = `
+      <div class="duim" style="background-image:url('${esc(duim)}')"></div>
+      <div><b>${esc(it.titel)}</b>
+        <span class="vlag">${it.soort}</span>
+        <button class="vlag ${it.hero ? 'aan' : ''}" data-v="hero" ${it.soort !== 'film' ? 'disabled title="Alleen films"' : ''}>opening</button>
+        <button class="vlag ${it.uitgelicht ? 'aan' : ''}" data-v="uitgelicht">home</button>
+        ${(it.ingredienten && it.ingredienten.length) ? '<span class="vlag">recept</span>' : ''}
+      </div>
+      <div class="acties">
+        <button class="knop licht mini" data-a="op" ${i === 0 ? 'disabled' : ''}>Omhoog</button>
+        <button class="knop licht mini" data-a="neer" ${i === LIJST.length - 1 ? 'disabled' : ''}>Omlaag</button>
+        <a class="knop licht mini" href="${SITE}recept/?r=${encodeURIComponent(basis(it.bestand))}" target="_blank" rel="noopener">Bekijk</a>
+        <button class="knop mini" data-a="bewerk">Bewerken</button>
+      </div>`;
+    li.querySelectorAll('[data-v]').forEach(b => b.onclick = () => { it[b.dataset.v] = !it[b.dataset.v]; if (!it[b.dataset.v]) delete it[b.dataset.v]; markeer(); tekenLijst(); });
+    li.querySelector('[data-a=op]').onclick = () => { [LIJST[i-1], LIJST[i]] = [LIJST[i], LIJST[i-1]]; markeer(); tekenLijst(); };
+    li.querySelector('[data-a=neer]').onclick = () => { [LIJST[i+1], LIJST[i]] = [LIJST[i], LIJST[i+1]]; markeer(); tekenLijst(); };
+    li.querySelector('[data-a=bewerk]').onclick = () => openForm(i);
+    ol.appendChild(li);
+  });
+  const h = LIJST.filter(x => x.hero).length, u = LIJST.filter(x => x.uitgelicht).length;
+  $('volgorde-info').textContent = `Opening: ${h} (de eerste 4 worden getoond) · Home: ${u} (de eerste 4 worden getoond)` + (gewijzigd ? ' · niet opgeslagen' : '');
+}
+function markeer(){ gewijzigd = true; $('volgorde-opslaan').disabled = false; }
+$('volgorde-opslaan').onclick = async () => {
+  const k = $('volgorde-opslaan'); k.disabled = true;
+  try { await publiceer('Portfolio: volgorde en vinkjes', [{pad: DATA, blob: jsonBlob()}]); gewijzigd = false; melding('Opgeslagen. Over 1 à 2 minuten zichtbaar op de site.', 'goed'); tekenLijst(); }
+  catch(e){ melding('Niet gelukt: ' + e.message, 'fout'); k.disabled = false; }
+};
+window.addEventListener('beforeunload', e => { if (gewijzigd) { e.preventDefault(); e.returnValue = ''; } });
+
+/* ===================== Formulier ===================== */
+const F = ['titel','tekst','waar','instagram','porties','tijd'];
+function soort(){ return document.querySelector('input[name=soort]:checked').value; }
+function zetSoort(s){
+  document.querySelector(`input[name=soort][value=${s}]`).checked = true;
+  const film = s === 'film';
+  $('bestand').accept = film ? 'video/mp4,video/quicktime,video/*' : 'image/*';
+  $('bestand-label').textContent = film ? 'Film (MP4, liefst 720 × 1280, onder 50 MB)' : 'Foto (JPG of PNG)';
+  $('bestand-hint').textContent = film ? 'Grote films eerst verkleinen. Lukt dat niet, stuur ze naar Claude.' : 'Wordt automatisch verkleind tot 1800 pixels breed.';
+  $('hero').disabled = !film; if (!film) $('hero').checked = false;
+}
+document.querySelectorAll('input[name=soort]').forEach(r => r.onchange = () => { zetSoort(soort()); nieuwBestand = nieuwPoster = null; $('bestand').value = ''; $('voorbeeld').innerHTML = ''; $('posterkies').hidden = true; });
+
+function openForm(i){
+  bewerkIndex = i; nieuwBestand = nieuwPoster = null;
+  const it = i >= 0 ? LIJST[i] : {soort:'foto'};
+  $('form').reset();
+  $('form-kop').textContent = i >= 0 ? 'Bewerken' : 'Nieuw item';
+  zetSoort(it.soort || 'foto');
+  F.forEach(k => $(k).value = it[k] || '');
+  $('verhaal').value = [].concat(it.verhaal || []).join('\n\n');
+  $('ingredienten').value = (it.ingredienten || []).join('\n');
+  $('bereiding').value = (it.bereiding || []).join('\n');
+  $('hero').checked = !!it.hero; $('uitgelicht').checked = !!it.uitgelicht;
+  $('verwijder').hidden = i < 0;
+  $('posterkies').hidden = true;
+  const v = $('voorbeeld');
+  if (i < 0) v.innerHTML = '';
+  else if (it.soort === 'film') v.innerHTML = `<video src="${esc(media(it.voorbeeld || it.bestand))}" ${it.poster ? `poster="${esc(media(it.poster))}"` : ''} muted loop autoplay playsinline></video>`;
+  else v.innerHTML = `<img src="${esc(media(it.bestand))}" alt="">`;
+  melding(''); toon('v-form'); scrollTo(0,0);
+}
+$('nieuw').onclick = () => openForm(-1);
+$('terug').onclick = () => { melding(''); tekenLijst(); toon('v-lijst'); };
+
+/* Foto verkleinen */
+async function verklein(file, max = 1800){
+  let bron;
+  try { bron = await createImageBitmap(file, {imageOrientation:'from-image'}); }
+  catch(e){ throw new Error('Deze foto kan de browser niet openen. Probeer JPG of PNG (iPhone-foto: exporteer als JPG).'); }
+  const s = Math.min(1, max / bron.width);
+  const c = document.createElement('canvas'); c.width = Math.round(bron.width * s); c.height = Math.round(bron.height * s);
+  c.getContext('2d').drawImage(bron, 0, 0, c.width, c.height);
+  return new Promise(ok => c.toBlob(ok, 'image/jpeg', .85));
+}
+/* Poster uit film halen */
+function pakBeeld(video){
+  const c = document.createElement('canvas');
+  const s = Math.min(1, 720 / video.videoWidth);
+  c.width = Math.round(video.videoWidth * s); c.height = Math.round(video.videoHeight * s);
+  c.getContext('2d').drawImage(video, 0, 0, c.width, c.height);
+  return new Promise(ok => c.toBlob(ok, 'image/jpeg', .85));
+}
+
+$('bestand').onchange = async () => {
+  const f = $('bestand').files[0]; if (!f) return;
+  const v = $('voorbeeld');
+  try {
+    if (soort() === 'foto') {
+      melding('Foto verkleinen…');
+      const blob = await verklein(f);
+      nieuwBestand = {blob, ext:'jpg'};
+      v.innerHTML = `<img src="${URL.createObjectURL(blob)}" alt="">`;
+      melding('Foto klaar (' + Math.round(blob.size/1024) + ' kB).', 'goed');
+    } else {
+      if (f.size > 95 * 1024 * 1024) throw new Error('Deze film is ' + Math.round(f.size/1048576) + ' MB. GitHub accepteert maximaal 100 MB; verklein hem eerst.');
+      nieuwBestand = {blob: f, ext:'mp4'};
+      v.innerHTML = `<video src="${URL.createObjectURL(f)}" muted playsinline preload="auto"></video>`;
+      const video = v.querySelector('video');
+      await new Promise((ok, fout) => { video.onloadeddata = ok; video.onerror = () => fout(new Error('Deze film kan de browser niet afspelen. Gebruik MP4 (H.264).')); });
+      const r = $('poster-tijd'); r.max = video.duration.toFixed(1); r.value = (video.duration * .85).toFixed(1);
+      $('posterkies').hidden = false;
+      const zet = async () => { video.currentTime = +r.value; await new Promise(ok => video.onseeked = ok); nieuwPoster = await pakBeeld(video); };
+      r.oninput = zet; await zet();
+      melding('Film klaar (' + Math.round(f.size/1048576) + ' MB). Kies hieronder de poster.' + (f.size > 50*1048576 ? ' Let op: groot bestand, laadt langzaam op de site.' : ''), f.size > 50*1048576 ? '' : 'goed');
+    }
+  } catch(e){ nieuwBestand = nieuwPoster = null; $('bestand').value = ''; v.innerHTML = ''; melding(e.message, 'fout'); }
+};
+
+$('form').onsubmit = async e => {
+  e.preventDefault();
+  const nieuw = bewerkIndex < 0;
+  const oud = nieuw ? {} : LIJST[bewerkIndex];
+  if (nieuw && !nieuwBestand) { melding('Kies eerst een foto of film.', 'fout'); return; }
+  const titel = $('titel').value.trim(); if (!titel) { melding('Vul een titel in.', 'fout'); return; }
+
+  const it = {...oud, soort: soort()};
+  F.forEach(k => { const v = $(k).value.trim(); if (v) it[k] = v; else delete it[k]; });
+  const verhaal = $('verhaal').value.split(/\n\s*\n/).map(x => x.trim()).filter(Boolean);
+  const ingr = $('ingredienten').value.split('\n').map(x => x.trim()).filter(Boolean);
+  const ber = $('bereiding').value.split('\n').map(x => x.trim()).filter(Boolean);
+  verhaal.length ? it.verhaal = verhaal : delete it.verhaal;
+  ingr.length ? it.ingredienten = ingr : delete it.ingredienten;
+  ber.length ? it.bereiding = ber : delete it.bereiding;
+  $('hero').checked && it.soort === 'film' ? it.hero = true : delete it.hero;
+  $('uitgelicht').checked ? it.uitgelicht = true : delete it.uitgelicht;
+  it.vorm = it.soort === 'film' ? 'verticaal' : 'staand';
+
+  const bestanden = [];
+  if (nieuwBestand) {
+    // unieke bestandsnaam op basis van de titel
+    let naam = slugVan(titel), n = 2;
+    const bezet = new Set(LIJST.filter(x => x !== oud).map(x => basis(x.bestand)));
+    while (bezet.has(naam)) naam = slugVan(titel) + '-' + n++;
+    it.bestand = naam + '.' + nieuwBestand.ext;
+    bestanden.push({pad: MAP + it.bestand, blob: nieuwBestand.blob});
+    if (it.soort === 'film') {
+      delete it.voorbeeld; // nieuwe film: korte loop maakt Claude later; anders speelt de film zelf
+      if (nieuwPoster) { it.poster = naam + '-poster.jpg'; bestanden.push({pad: MAP + it.poster, blob: nieuwPoster}); }
+    } else { delete it.poster; delete it.voorbeeld; }
+  }
+
+  if (nieuw) LIJST.unshift(it); else LIJST[bewerkIndex] = it;
+  bestanden.push({pad: DATA, blob: jsonBlob()});
+
+  const k = $('opslaan'); k.disabled = true;
+  try {
+    await publiceer((nieuw ? 'Portfolio: nieuw ' : 'Portfolio: bijgewerkt ') + titel, bestanden);
+    gewijzigd = false;
+    melding('Gepubliceerd. Over 1 à 2 minuten staat "' + titel + '" op de site.', 'goed');
+    tekenLijst(); toon('v-lijst');
+  } catch(err){
+    if (nieuw) LIJST.shift(); else LIJST[bewerkIndex] = oud;
+    melding('Niet gelukt: ' + err.message, 'fout');
+  } finally { k.disabled = false; }
+};
+
+$('verwijder').onclick = async () => {
+  const it = LIJST[bewerkIndex];
+  if (!confirm('"' + it.titel + '" verwijderen van de site?')) return;
+  const weg = LIJST.splice(bewerkIndex, 1)[0];
+  const bestanden = [{pad: DATA, blob: jsonBlob()}];
+  [weg.bestand, weg.voorbeeld, weg.poster].filter(Boolean).forEach(f => bestanden.push({pad: MAP + f, verwijder: true}));
+  try {
+    await publiceer('Portfolio: verwijderd ' + weg.titel, bestanden);
+    melding('"' + weg.titel + '" is verwijderd.', 'goed'); tekenLijst(); toon('v-lijst');
+  } catch(err){ LIJST.splice(bewerkIndex, 0, weg); melding('Niet gelukt: ' + err.message, 'fout'); }
+};
+
+start();
+</script>
+</body>
+</html>

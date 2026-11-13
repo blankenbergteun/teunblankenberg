@@ -4,7 +4,8 @@ Statische site op GitHub Pages. Geen build-stap.
 
 - `index.html` — home
 - `portfolio/`, `over-mij/`, `aanvraag/` — de andere pagina's
-- `portfolio.js` — de inhoud van het portfolio (home toont de beelden met `uitgelicht: true`)
+- `data/portfolio.json` — de inhoud van het portfolio
+- `beheer/` — beheerpagina om het portfolio aan te passen (niet gelinkt vanaf de site)
 - `assets/site.css` en `assets/site.js` — opmaak en werking van alle pagina's
 
 ## Foto's en films toevoegen
@@ -12,7 +13,9 @@ Statische site op GitHub Pages. Geen build-stap.
 **Portret op de opening:** `assets/teun.jpg` (staand, 4:5).
 **Portret bij Over mij:** `assets/teun-2.jpg` (staand, 3:4).
 
-**Portfolio:** zet het bestand in `assets/portfolio/` en voeg in `portfolio.js` een blok toe:
+**Portfolio:** het makkelijkst via de beheerpagina: `https://blankenbergteun.github.io/teunblankenberg/beheer/`. Daar voeg je foto's en films toe, schrijf je recepten, verander je de volgorde en kies je wat op de homepage komt. Inloggen gaat met een GitHub-token (uitleg op de pagina zelf).
+
+Handmatig kan ook: zet het bestand in `assets/portfolio/` en voeg in `data/portfolio.json` een blok toe:
 
 ```js
 {
@@ -25,7 +28,7 @@ Statische site op GitHub Pages. Geen build-stap.
 },
 ```
 
-Elk beeld krijgt automatisch een eigen receptpagina. Voeg `verhaal`, `porties`, `tijd`, `ingredienten` en `bereiding` toe in `portfolio.js` (uitleg bovenaan dat bestand).
+Elk beeld krijgt automatisch een eigen receptpagina met `verhaal`, `porties`, `tijd`, `ingredienten` en `bereiding`.
 
 Zolang een bestand ontbreekt, zie je een gekleurd vlak met de bestandsnaam.
 
