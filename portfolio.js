@@ -17,6 +17,14 @@
   voorbeeld  : korte loop zonder geluid voor in het overzicht (anders wordt "bestand" gebruikt)
   poster     : stilstaand beeld (.jpg) dat je ziet terwijl de film laadt
   instagram  : link naar dezelfde reel op Instagram
+
+  Receptpagina (klik op een beeld → recept/?r=bestandsnaam). Allemaal optioneel:
+  verhaal      : ["alinea 1", "alinea 2"]  (anders wordt "tekst" gebruikt)
+  porties      : "Voor 4 personen"
+  tijd         : "2 uur, plus een nacht rijzen"
+  ingredienten : ["500 g bloem", "10 g zout", "# Voor de vulling", "300 g flespompoen"]   (# = tussenkopje)
+  bereiding    : ["Stap 1 ...", "Stap 2 ..."]
+  Zonder ingredienten en bereiding staat er: "Het volledige recept volgt binnenkort."
 */
 /* Foto's toevoegen: zelfde blok, met soort: "foto", bestand: "naam.jpg" en vorm: "staand", "liggend" of "vierkant". */
 window.PORTFOLIO = [

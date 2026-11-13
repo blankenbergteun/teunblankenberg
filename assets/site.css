@@ -54,8 +54,8 @@ a{color:inherit}
 
 /* ---------- opening: filmwand ---------- */
 .filmwand{height:100svh;min-height:560px;display:grid;grid-template-columns:repeat(4,1fr);gap:3px;padding-top:54px}
-.filmwand button{all:unset;position:relative;display:block;overflow:hidden;cursor:zoom-in;background:#13263c}
-.filmwand button:focus-visible{outline:2px solid var(--signal);outline-offset:-4px}
+.filmwand a{position:relative;display:block;overflow:hidden;background:#13263c;text-decoration:none}
+.filmwand a:focus-visible{outline:2px solid var(--signal);outline-offset:-4px}
 .filmwand video{position:absolute;inset:0}
 .filmwand .bij{position:absolute;left:0;right:0;bottom:0;padding:48px 16px 16px;background:linear-gradient(transparent,rgba(19,38,60,.8));color:var(--snow);font:400 clamp(20px,1.8vw,26px)/1.1 var(--hand)}
 .filmwand .bij small{display:block;margin-top:6px;font:400 12px/1.4 var(--type);opacity:.85}
@@ -77,11 +77,11 @@ h1.kop,h2{font:400 clamp(44px,6vw,88px)/1 var(--hand);color:var(--navy)}
 .grid-4{grid-template-columns:repeat(4,1fr)}
 @media (max-width:1000px){.grid-4{grid-template-columns:repeat(2,1fr)}}
 .item{min-width:0}
-.item button{all:unset;display:block;width:100%;cursor:zoom-in}
-.item button:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
+.item .tegel{display:block;text-decoration:none;color:inherit}
+.item .tegel:hover h3{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
+.item .frame{aspect-ratio:4/5}
 .frame{position:relative;overflow:hidden;background:var(--line)}
 .frame>img,.frame>video{position:absolute;inset:0;z-index:1}
-.staand .frame{aspect-ratio:4/5}.liggend .frame{aspect-ratio:3/2}.vierkant .frame{aspect-ratio:1/1}.verticaal .frame{aspect-ratio:9/16}
 .ph{position:absolute;inset:0;display:flex;align-items:flex-end;padding:14px;font:400 13px/1.4 var(--type);color:rgba(244,242,239,.85)}
 .t1 .ph{background:linear-gradient(160deg,#3a5f8c,#213E60)}
 .t2 .ph{background:linear-gradient(200deg,#ECE8E1,#D5CEC3);color:var(--slate)}
@@ -91,6 +91,32 @@ h1.kop,h2{font:400 clamp(44px,6vw,88px)/1 var(--hand);color:var(--navy)}
 .item h3{font:400 26px/1.1 var(--hand);margin-top:14px}
 .item p{margin-top:6px;font-size:16px;line-height:1.55;max-width:46ch}
 .item .waar{margin-top:8px;font:400 13px/1.4 var(--type);color:var(--mist)}
+
+/* ---------- receptpagina ---------- */
+.recept{padding-left:var(--gutter);padding-right:var(--gutter);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,5vw,80px);align-items:start}
+.r-media{position:sticky;top:90px;background:var(--line)}
+.r-media img{height:auto}
+.r-media:not(.is-film){max-width:520px;justify-self:end;width:100%}
+.r-media.is-film{max-width:440px;justify-self:end;width:100%}
+.r-media.is-film video{aspect-ratio:9/16;object-fit:cover}
+.r-tekst{max-width:62ch}
+.terug{display:inline-block;font:400 13px/1.4 var(--type);color:var(--slate);margin-bottom:18px}
+.r-tekst h1.kop{font-size:clamp(34px,3.8vw,56px);line-height:1.08;margin-bottom:18px}
+.r-meta{font:400 13px/1.7 var(--type);color:var(--mist);margin-bottom:28px}
+.r-verhaal p{margin-bottom:1em;font-size:18px}
+.r-tekst h2{font-size:clamp(30px,3vw,40px);margin:40px 0 14px}
+.r-tekst h3{font:400 13px/1.4 var(--type);color:var(--slate);margin:18px 0 6px}
+.r-tekst ul{list-style:none;border-top:1px solid var(--line)}
+.r-tekst ul li{padding:8px 0;border-bottom:1px solid var(--line);font-size:16px}
+.stappen{padding-left:1.4em}
+.stappen li{margin-bottom:14px;padding-left:6px}
+.stappen li::marker{font:400 14px var(--type);color:var(--mist)}
+.r-volgt{margin-top:28px;font:400 14px/1.5 var(--type);color:var(--slate)}
+.r-nav{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:56px;padding-top:20px;border-top:1px solid var(--line)}
+.r-nav a{text-decoration:none;font:400 22px/1.15 var(--hand)}
+.r-nav a:last-child{text-align:right}
+.r-nav small{display:block;font:400 12px/1.4 var(--type);color:var(--mist);margin-bottom:6px}
+.leeg{margin-top:20px}
 
 /* groot bekijken */
 dialog{border:0;padding:0;background:transparent;max-width:min(1100px,94vw);max-height:94vh;margin:auto;color:var(--snow)}
@@ -106,9 +132,9 @@ dialog::backdrop{background:rgba(19,38,60,.94)}
 
 /* ---------- over mij ---------- */
 .about{display:grid;grid-template-columns:repeat(12,1fr);gap:40px 24px;align-items:start}
-.about .portrait{grid-column:1/6}
+.about .portrait{grid-column:1/6;width:100%;max-width:380px;justify-self:end}
 .about .portrait .frame{aspect-ratio:3/4}
-.about .text{grid-column:7/12;padding-top:2vw}
+.about .text{grid-column:6/12;padding-top:2vw}
 .about .text h1,.about .text h2{margin-bottom:32px}
 .about .text p{max-width:42ch;margin-bottom:1.1em}
 .facts{margin-top:40px;border-top:1px solid var(--line)}
@@ -156,6 +182,10 @@ footer .sig{height:32px;width:auto;fill:var(--navy);align-self:center}
   .portret{width:min(78vw,360px)}
   .filmwand{grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;padding-top:48px}
   .filmwand .bij{padding:36px 10px 10px}
+  .recept{grid-template-columns:1fr}
+  .r-media{position:static}
+  .r-media.is-film,.r-media:not(.is-film){justify-self:center;max-width:360px}
+  .about .portrait{justify-self:start}
   .label{margin:-56px 0 0}
   .mark svg{height:19px}
   .top nav{gap:14px;font-size:14px}

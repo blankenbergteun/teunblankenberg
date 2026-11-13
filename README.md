@@ -25,6 +25,8 @@ Statische site op GitHub Pages. Geen build-stap.
 },
 ```
 
+Elk beeld krijgt automatisch een eigen receptpagina. Voeg `verhaal`, `porties`, `tijd`, `ingredienten` en `bereiding` toe in `portfolio.js` (uitleg bovenaan dat bestand).
+
 Zolang een bestand ontbreekt, zie je een gekleurd vlak met de bestandsnaam.
 
 Tips: foto's max ~2000 px breed (JPG).
