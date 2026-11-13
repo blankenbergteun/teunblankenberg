@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Doe een aanvraag | Teun Blankenberg</title>
+<meta name="description" content="Vraag een diner, borrel of feest aan bij private chef Teun Blankenberg.">
+<link rel="preload" href="../assets/fonts/jacobs-doodles.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body data-root="../">
+
+<header class="top">
+  <a class="mark" href="../" aria-label="Teun Blankenberg, naar de homepage"><svg viewBox="0 0 1131 194" aria-hidden="true"><use href="../assets/tekeningen/naam-sprite.svg#logo"/></svg></a>
+  <nav aria-label="Hoofdmenu">
+    <a href="../portfolio/">Portfolio</a>
+    <a href="../over-mij/">Over mij</a>
+    <a class="cta" href="../aanvraag/" aria-current="page"><span class="lang">Doe een aanvraag</span><span class="kort">Aanvraag</span></a>
+  </nav>
+</header>
+
+<main>
+  <section class="navy aanvraag" aria-labelledby="aanvraag-h">
+    <div class="book">
+      <div class="intro-text">
+        <h1 class="kop" id="aanvraag-h">Doe een aanvraag</h1>
+        <p>Vertel kort wat je in gedachten hebt. Je krijgt binnen twee dagen een voorstel met menu en prijs.</p>
+      </div>
+      <form id="aanvraagformulier">
+        <div class="field"><label for="naam">Naam</label><input id="naam" name="naam" autocomplete="name" required></div>
+        <div class="field"><label for="mail">E-mail</label><input id="mail" name="mail" type="email" autocomplete="email" required></div>
+        <div class="field"><label for="datum">Datum</label><input id="datum" name="datum" type="date"></div>
+        <div class="field"><label for="gasten">Aantal gasten</label><input id="gasten" name="gasten" type="number" min="1" inputmode="numeric"></div>
+        <div class="field wide"><label for="plek">Waar</label><input id="plek" name="plek" placeholder="Thuis, op kantoor, buiten…"></div>
+        <div class="field wide"><label for="wens">Wat voor gelegenheid?</label><textarea id="wens" name="wens"></textarea></div>
+        <button class="knop" type="submit">Verstuur aanvraag</button>
+        <p class="form-note">Je mailprogramma opent met je aanvraag erin. Liever direct mailen: <a href="mailto:hallo@teunblankenberg.nl">hallo@teunblankenberg.nl</a></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <svg class="sig" viewBox="0 0 1131 194" role="img" aria-label="Teun Blankenberg"><use href="../assets/tekeningen/naam-sprite.svg#logo"/></svg>
+  <span>Private chef in Amsterdam</span>
+  <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+  <a href="mailto:hallo@teunblankenberg.nl">hallo@teunblankenberg.nl</a>
+  <span>KvK 00000000</span>
+</footer>
+
+<script src="../assets/site.js"></script>
+</body>
+</html>

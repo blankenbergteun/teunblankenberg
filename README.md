@@ -1,6 +1,11 @@
 # Teun Blankenberg — website
 
-Statische site op GitHub Pages. Geen build-stap: `index.html` is de site, `portfolio.js` is de inhoud van het portfolio.
+Statische site op GitHub Pages. Geen build-stap.
+
+- `index.html` — home
+- `portfolio/`, `over-mij/`, `aanvraag/` — de andere pagina's
+- `portfolio.js` — de inhoud van het portfolio (home toont de beelden met `uitgelicht: true`)
+- `assets/site.css` en `assets/site.js` — opmaak en werking van alle pagina's
 
 ## Foto's en films toevoegen
 
@@ -22,7 +27,9 @@ Statische site op GitHub Pages. Geen build-stap: `index.html` is de site, `portf
 
 Zolang een bestand ontbreekt, zie je een gekleurd vlak met de bestandsnaam.
 
-Tips: foto's max ~2000 px breed (JPG), films als MP4 (H.264), zonder geluid, liefst onder 8 MB.
+Tips: foto's max ~2000 px breed (JPG).
+
+Films: per film liefst drie bestanden: de volledige film met geluid (`bestand`, 720×1280 MP4), een korte loop zonder geluid voor het overzicht (`voorbeeld`, 6–10 s) en een stilstaand beeld (`poster`, JPG). Max 100 MB per bestand op GitHub; mik op 5–15 MB per minuut film.
 
 ## Tekeningen
 
