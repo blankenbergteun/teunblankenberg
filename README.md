@@ -50,3 +50,11 @@ Films: per film liefst drie bestanden: de volledige film met geluid (`bestand`, 
 ## Later
 
 - Menu samenstellen met prijsindicatie
+
+## Loops (de korte filmpjes zonder geluid)
+
+Elke loop is een montage van 4 shots van 2 seconden. Andere momenten kiezen? Geef per film 4 tijden door, bijvoorbeeld:
+
+```
+baguette: 0:14, 0:36, 1:27, 1:41
+```

@@ -43,6 +43,20 @@ if (grid) {
   });
 }
 
+/* ---------- Filmwand op de homepage (hero: true) ---------- */
+const wand = document.getElementById('filmwand');
+if (wand) {
+  (window.PORTFOLIO || []).filter(it => it.hero).slice(0, 4).forEach(it => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('aria-label', it.titel + ': film bekijken');
+    b.innerHTML = `<video src="${esc(pad(it.voorbeeld || it.bestand))}" ${it.poster ? `poster="${esc(pad(it.poster))}"` : ''} muted loop playsinline preload="auto"></video>
+      <span class="bij">${esc(it.titel)}<small>Bekijk de film</small></span>`;
+    b.addEventListener('click', () => openZoom(it));
+    wand.appendChild(b);
+  });
+}
+
 /* ---------- Groot bekijken ---------- */
 const dlg = document.getElementById('zoom');
 function openZoom(it){
@@ -67,7 +81,7 @@ const io = new IntersectionObserver(entries => {
     else v.pause();
   });
 }, {threshold: .25});
-document.querySelectorAll('#grid video').forEach(v => io.observe(v));
+document.querySelectorAll('#grid video, #filmwand video').forEach(v => io.observe(v));
 
 /* ---------- Kop: marineblauw boven blauwe vlakken, licht daartussen ---------- */
 const bar = document.querySelector('.top');

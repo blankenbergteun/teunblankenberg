@@ -20,7 +20,10 @@
 </header>
 
 <main>
-  <div class="hero navy">
+  <!-- Opening: de films met hero: true in portfolio.js -->
+  <div class="filmwand navy" id="filmwand" aria-label="Films uit mijn keuken"></div>
+
+  <div class="hero intro-sec navy">
     <div class="duo">
       <!-- Je portret: assets/teun.jpg (staand, 4:5) -->
       <div class="portret t1"><img src="assets/teun.jpg" alt="Teun Blankenberg in de keuken" onerror="this.remove()"><div class="ph">foto van jou aan het werk</div></div>
@@ -32,7 +35,7 @@
           <img class="l-chef" src="assets/tekeningen/regel-chef-wit.svg" alt="">
         </div>
         <p class="where">Thuis of op locatie, in en rond Amsterdam</p>
-        <a href="aanvraag/">Doe een aanvraag</a>
+        <p class="links"><a href="over-mij/">Over mij</a><a href="aanvraag/">Doe een aanvraag</a></p>
       </div>
     </div>
   </div>
@@ -40,22 +43,10 @@
   <section aria-labelledby="werk-h">
     <div class="intro">
       <h2 id="werk-h">Uit het portfolio</h2>
-      <p>Een greep uit diners, borrels en films uit mijn keuken.<br><a class="meer" href="portfolio/">Bekijk het hele portfolio</a></p>
+      <p>Meer gerechten uit mijn keuken.<br><a class="meer" href="portfolio/">Bekijk het hele portfolio</a></p>
     </div>
-    <!-- Laat de beelden zien met uitgelicht: true in portfolio.js (anders de eerste 6) -->
-    <div class="grid" id="grid" data-max="6"></div>
-  </section>
-
-  <section aria-labelledby="over-h">
-    <div class="about">
-      <div class="portrait t2"><div class="frame"><img src="assets/teun-2.jpg" alt="Teun Blankenberg" onerror="this.remove()"><div class="ph">tweede portret, bijvoorbeeld aan tafel met gasten</div></div></div>
-      <div class="text">
-        <h2 id="over-h">Over mij</h2>
-        <p>Ik ben Teun Blankenberg. Ik kookte in de keuken van RIJKS en werkte jaren in de wijnimport, vooral met kleine producenten uit Toscane.</p>
-        <p>Nu kook ik bij mensen thuis en op locatie: een diner voor acht, een borrel voor zestig, een lange tafel in de tuin. Seizoen eerst, weinig poespas, en wijnen die ik ken van de mensen die ze maken.</p>
-        <a class="meer" href="over-mij/">Meer over mij</a>
-      </div>
-    </div>
+    <!-- Toont de beelden met uitgelicht: true in portfolio.js -->
+    <div class="grid grid-4" id="grid" data-max="4"></div>
   </section>
 
   <section class="navy band" aria-labelledby="band-h">

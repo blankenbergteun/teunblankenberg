@@ -52,6 +52,17 @@ a{color:inherit}
 .label .where{margin-top:clamp(20px,2.4vw,28px);font:400 13px/1.5 var(--type);opacity:.85}
 .label a{margin-top:8px;font-size:15px;text-decoration-color:var(--signal);text-decoration-thickness:2px;text-underline-offset:5px}
 
+/* ---------- opening: filmwand ---------- */
+.filmwand{height:100svh;min-height:560px;display:grid;grid-template-columns:repeat(4,1fr);gap:3px;padding-top:54px}
+.filmwand button{all:unset;position:relative;display:block;overflow:hidden;cursor:zoom-in;background:#13263c}
+.filmwand button:focus-visible{outline:2px solid var(--signal);outline-offset:-4px}
+.filmwand video{position:absolute;inset:0}
+.filmwand .bij{position:absolute;left:0;right:0;bottom:0;padding:48px 16px 16px;background:linear-gradient(transparent,rgba(19,38,60,.8));color:var(--snow);font:400 clamp(20px,1.8vw,26px)/1.1 var(--hand)}
+.filmwand .bij small{display:block;margin-top:6px;font:400 12px/1.4 var(--type);opacity:.85}
+.hero.intro-sec{min-height:auto;padding:clamp(80px,10vw,140px) var(--gutter)}
+.label .links{display:flex;gap:22px;margin-top:8px}
+.label .links a{margin-top:0}
+
 /* ---------- secties ---------- */
 section{padding:clamp(80px,11vw,150px) var(--gutter) 0}
 .page-head{padding-top:clamp(120px,14vw,190px)}
@@ -63,6 +74,7 @@ h1.kop,h2{font:400 clamp(44px,6vw,88px)/1 var(--hand);color:var(--navy)}
 
 /* ---------- portfolio: overzicht met tekst bij elk beeld ---------- */
 .grid{columns:3 300px;column-gap:clamp(20px,2.4vw,36px)}
+.grid-4{columns:4 220px}
 .item{break-inside:avoid;margin-bottom:clamp(36px,4vw,56px)}
 .item button{all:unset;display:block;width:100%;cursor:zoom-in}
 .item button:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
@@ -98,8 +110,12 @@ dialog::backdrop{background:rgba(19,38,60,.94)}
 .about .text{grid-column:7/12;padding-top:2vw}
 .about .text h1,.about .text h2{margin-bottom:32px}
 .about .text p{max-width:42ch;margin-bottom:1.1em}
+.about .text h2.tussenkop{font-size:clamp(30px,3.4vw,44px);margin:44px 0 16px}
+.weg{list-style:none;border-top:1px solid var(--line)}
+.weg li{display:grid;grid-template-columns:7em 1fr;gap:16px;padding:11px 0;border-bottom:1px solid var(--line);font-size:15px}
+.weg span{font:400 13px/1.6 var(--type);color:var(--mist)}
 .facts{margin-top:40px;border-top:1px solid var(--line)}
-.facts div{display:grid;grid-template-columns:9em 1fr;gap:16px;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px}
+.facts div{display:grid;grid-template-columns:7em 1fr;gap:16px;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px}
 .facts dt{color:var(--mist);font:400 13px/1.6 var(--type)}
 
 /* ---------- marineblauwe vlakken ---------- */
@@ -141,6 +157,8 @@ footer .sig{height:32px;width:auto;fill:var(--navy);align-self:center}
   .book form{grid-template-columns:1fr}
   .duo{flex-direction:column;align-items:center}
   .portret{width:min(78vw,360px)}
+  .filmwand{grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;padding-top:48px}
+  .filmwand .bij{padding:36px 10px 10px}
   .label{margin:-56px 0 0}
   .mark svg{height:19px}
   .top nav{gap:14px;font-size:14px}

@@ -10,7 +10,8 @@
   titel      : kort, verschijnt in je handschrift
   tekst      : wat men ziet, 1 à 3 zinnen
   waar       : gelegenheid, plek of aantal gasten
-  uitgelicht : true = komt ook op de homepage (maximaal 6)
+  hero       : true = staat bovenaan de homepage in de filmwand (4 stuks, alleen films)
+  uitgelicht : true = staat op de homepage onder "Uit het portfolio" (4 stuks)
 
   Alleen voor films (allemaal optioneel):
   voorbeeld  : korte loop zonder geluid voor in het overzicht (anders wordt "bestand" gebruikt)
@@ -20,7 +21,7 @@
 /* Foto's toevoegen: zelfde blok, met soort: "foto", bestand: "naam.jpg" en vorm: "staand", "liggend" of "vierkant". */
 window.PORTFOLIO = [
   {
-    soort: "film", vorm: "verticaal", uitgelicht: true,
+    soort: "film", vorm: "verticaal", hero: true,
     bestand: "baguette.mp4", voorbeeld: "baguette-loop.mp4", poster: "baguette.jpg",
     instagram: "",
     titel: "Baguette",
@@ -36,7 +37,7 @@ window.PORTFOLIO = [
     waar: "Film uit mijn keuken, 1:07"
   },
   {
-    soort: "film", vorm: "verticaal", uitgelicht: true,
+    soort: "film", vorm: "verticaal", hero: true,
     bestand: "rode-mul.mp4", voorbeeld: "rode-mul-loop.mp4", poster: "rode-mul.jpg",
     instagram: "",
     titel: "Rode mul met aardappelschubben",
@@ -44,7 +45,7 @@ window.PORTFOLIO = [
     waar: "Film uit mijn keuken, 2:29"
   },
   {
-    soort: "film", vorm: "verticaal", uitgelicht: true,
+    soort: "film", vorm: "verticaal", hero: true,
     bestand: "eclair-au-cafe.mp4", voorbeeld: "eclair-au-cafe-loop.mp4", poster: "eclair-au-cafe.jpg",
     instagram: "",
     titel: "Eclair au café",
@@ -52,7 +53,7 @@ window.PORTFOLIO = [
     waar: "Film uit mijn keuken, 1:30"
   },
   {
-    soort: "film", vorm: "verticaal", uitgelicht: true,
+    soort: "film", vorm: "verticaal", hero: true,
     bestand: "kip-tajine.mp4", voorbeeld: "kip-tajine-loop.mp4", poster: "kip-tajine.jpg",
     instagram: "",
     titel: "Kip tajine, m'qualli style",
@@ -68,7 +69,7 @@ window.PORTFOLIO = [
     waar: "Film uit mijn keuken, 0:32"
   },
   {
-    soort: "film", vorm: "verticaal",
+    soort: "film", vorm: "verticaal", uitgelicht: true,
     bestand: "tiramisu.mp4", voorbeeld: "tiramisu-loop.mp4", poster: "tiramisu.jpg",
     instagram: "",
     titel: "Tiramisu",
@@ -76,7 +77,7 @@ window.PORTFOLIO = [
     waar: "Film uit mijn keuken, 1:22"
   },
   {
-    soort: "film", vorm: "verticaal",
+    soort: "film", vorm: "verticaal", uitgelicht: true,
     bestand: "bonensalade.mp4", voorbeeld: "bonensalade-loop.mp4", poster: "bonensalade.jpg",
     instagram: "",
     titel: "Bonensalade met groene saus",
