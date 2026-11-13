@@ -1,5 +1,7 @@
 /* Lettertypes staan zelf op de site: sneller en geen Google-tracking (AVG) */
 @font-face{font-family:"Jacobs Doodles";font-display:swap;src:url(fonts/jacobs-doodles.woff2) format("woff2")}
+/* Betere hoofdletter T (zelfde oplossing als op de Blankenberg Wijnen-site) */
+@font-face{font-family:"Jacobs Doodles";font-display:swap;src:url(fonts/jacobs-doodles-T.woff2) format("woff2");unicode-range:U+0054}
 @font-face{font-family:"Alte Haas Grotesk";font-display:swap;src:url(fonts/alte-haas-grotesk-regular.woff2) format("woff2")}
 /* Courier New zit op Mac en Windows; Courier Prime is de vervanger voor andere toestellen */
 @font-face{font-family:"Courier Prime";font-display:swap;src:url(fonts/courier-prime-400.woff2) format("woff2")}
