@@ -40,7 +40,7 @@ a{color:inherit}
   background:var(--navy) url(tekeningen/iconen-wit.svg) 0 0/clamp(420px,52vw,780px) auto repeat}
 .duo{display:flex;align-items:flex-end}
 .portret{position:relative;width:clamp(260px,30vw,440px);aspect-ratio:4/5;background:#3a5f8c;box-shadow:0 18px 40px rgba(8,20,36,.45);border:10px solid var(--snow);transform:rotate(-1.5deg)}
-.portret img{position:absolute;inset:0}
+.portret img{position:absolute;inset:0;z-index:1}
 .label{position:relative;z-index:1;margin:0 0 clamp(24px,5vw,64px) calc(clamp(40px,5vw,80px) * -1);background:var(--navy);padding:clamp(28px,3.4vw,48px) clamp(28px,4vw,60px);display:flex;flex-direction:column;align-items:center;text-align:center;outline:1.5px solid rgba(244,242,239,.7);outline-offset:-12px;box-shadow:0 18px 40px rgba(8,20,36,.4)}
 /* Alles op dezelfde schaal (--k px per tekeneenheid), zodat de pen overal even dik is */
 .label{--k:clamp(.085px,.0075vw,.105px)}
@@ -67,14 +67,14 @@ h1.kop,h2{font:400 clamp(44px,6vw,88px)/1 var(--hand);color:var(--navy)}
 .item button{all:unset;display:block;width:100%;cursor:zoom-in}
 .item button:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
 .frame{position:relative;overflow:hidden;background:var(--line)}
-.frame>img,.frame>video{position:absolute;inset:0}
+.frame>img,.frame>video{position:absolute;inset:0;z-index:1}
 .staand .frame{aspect-ratio:4/5}.liggend .frame{aspect-ratio:3/2}.vierkant .frame{aspect-ratio:1/1}.verticaal .frame{aspect-ratio:9/16}
 .ph{position:absolute;inset:0;display:flex;align-items:flex-end;padding:14px;font:400 13px/1.4 var(--type);color:rgba(244,242,239,.85)}
 .t1 .ph{background:linear-gradient(160deg,#3a5f8c,#213E60)}
 .t2 .ph{background:linear-gradient(200deg,#ECE8E1,#D5CEC3);color:var(--slate)}
 .t3 .ph{background:linear-gradient(140deg,#4d6d93,#1a3350)}
 .t4 .ph{background:linear-gradient(180deg,#213E60,#13263c)}
-.soort{position:absolute;top:12px;right:12px;z-index:1;font:400 12px/1 var(--type);background:var(--snow);color:var(--navy);padding:5px 7px}
+.soort{position:absolute;top:12px;right:12px;z-index:2;font:400 12px/1 var(--type);background:var(--snow);color:var(--navy);padding:5px 7px}
 .item h3{font:400 26px/1.1 var(--hand);margin-top:14px}
 .item p{margin-top:6px;font-size:16px;line-height:1.55;max-width:46ch}
 .item .waar{margin-top:8px;font:400 13px/1.4 var(--type);color:var(--mist)}
