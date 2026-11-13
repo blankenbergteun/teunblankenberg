@@ -29,6 +29,13 @@ window.PORTFOLIO = [
     waar: "Film uit mijn keuken, 1:56"
   },
   {
+    soort: "foto", vorm: "staand", uitgelicht: true,
+    bestand: "tortellini-flespompoen.jpg",
+    titel: "Tortellini met flespompoen, marjoraan en mascarpone",
+    tekst: "Vierkantjes vers pastadeeg met een toef vulling van flespompoen, mascarpone en marjoraan. Eronder de gevouwen tortellini op griesmeel, klaar voor de pan.",
+    waar: "Uit mijn keuken"
+  },
+  {
     soort: "film", vorm: "verticaal", uitgelicht: true,
     bestand: "carne-cruda.mp4", voorbeeld: "carne-cruda-loop.mp4", poster: "carne-cruda.jpg",
     instagram: "",
@@ -77,7 +84,7 @@ window.PORTFOLIO = [
     waar: "Film uit mijn keuken, 1:22"
   },
   {
-    soort: "film", vorm: "verticaal", uitgelicht: true,
+    soort: "film", vorm: "verticaal",
     bestand: "bonensalade.mp4", voorbeeld: "bonensalade-loop.mp4", poster: "bonensalade.jpg",
     instagram: "",
     titel: "Bonensalade met groene saus",

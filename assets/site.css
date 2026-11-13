@@ -73,9 +73,10 @@ h1.kop,h2{font:400 clamp(44px,6vw,88px)/1 var(--hand);color:var(--navy)}
 .meer{display:inline-block;margin-top:8px;font-size:16px;text-decoration-color:var(--signal);text-decoration-thickness:2px;text-underline-offset:5px}
 
 /* ---------- portfolio: overzicht met tekst bij elk beeld ---------- */
-.grid{columns:3 300px;column-gap:clamp(20px,2.4vw,36px)}
-.grid-4{columns:4 220px}
-.item{break-inside:avoid;margin-bottom:clamp(36px,4vw,56px)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:clamp(36px,4vw,56px) clamp(20px,2.4vw,36px);align-items:start}
+.grid-4{grid-template-columns:repeat(4,1fr)}
+@media (max-width:1000px){.grid-4{grid-template-columns:repeat(2,1fr)}}
+.item{min-width:0}
 .item button{all:unset;display:block;width:100%;cursor:zoom-in}
 .item button:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
 .frame{position:relative;overflow:hidden;background:var(--line)}
