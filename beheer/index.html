@@ -151,9 +151,18 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--navy);bo
     <div class="vol"><h2 style="margin:12px 0 0">Receptpagina</h2><p class="klein">Alles hieronder is optioneel. Zonder ingrediënten en bereiding staat er "Het volledige recept volgt binnenkort".</p></div>
     <div class="vol"><label for="verhaal">Verhaal (laat een lege regel tussen alinea's)</label><textarea id="verhaal" rows="5"></textarea></div>
     <div><label for="porties">Porties</label><input type="text" id="porties" placeholder="Voor 4 personen"></div>
-    <div><label for="tijd">Tijd</label><input type="text" id="tijd" placeholder="1 uur, plus een nacht rijzen"></div>
+    <div><label for="tijd">Tijd (zoals het op de pagina staat)</label><input type="text" id="tijd" placeholder="1 uur, plus een nacht rijzen"></div>
+    <div><label for="minuten">Totale tijd in minuten (voor Google)</label><input type="text" id="minuten" inputmode="numeric" placeholder="90"></div>
+    <div><label for="categorie">Soort gerecht</label><select id="categorie"><option value="">—</option><option>Hapje</option><option>Voorgerecht</option><option>Hoofdgerecht</option><option>Bijgerecht</option><option>Dessert</option><option>Brood</option><option>Saus</option></select></div>
+    <div><label for="keuken">Keuken</label><input type="text" id="keuken" placeholder="Italiaans, Frans, Marokkaans…"></div>
+    <div><label for="trefwoorden">Trefwoorden (met komma's)</label><input type="text" id="trefwoorden" placeholder="verse pasta, pompoen, herfst"></div>
     <div><label for="ingredienten">Ingrediënten (één per regel, # voor een tussenkopje)</label><textarea id="ingredienten" rows="10" placeholder="# Deeg&#10;300 g tipo 00&#10;3 eieren&#10;# Vulling&#10;500 g flespompoen"></textarea></div>
     <div><label for="bereiding">Bereiding (één stap per regel)</label><textarea id="bereiding" rows="10" placeholder="Rooster de pompoen 40 minuten op 200 °C.&#10;Maak het deeg…"></textarea></div>
+
+    <div class="vol"><h2 style="margin:12px 0 0">Google</h2><p class="klein">Optioneel. Leeg laten = titel en korte tekst worden gebruikt. Recepten met ingrediënten en bereiding krijgen automatisch receptgegevens (schema) voor Google.</p></div>
+    <div class="vol"><label for="seo_titel">Titel in Google (max. ± 60 tekens)</label><input type="text" id="seo_titel" maxlength="70"></div>
+    <div class="vol"><label for="seo_omschrijving">Omschrijving in Google (max. ± 155 tekens)</label><textarea id="seo_omschrijving" rows="2" maxlength="170"></textarea></div>
+    <div><label for="datum">Datum</label><input type="text" id="datum" placeholder="JJJJ-MM-DD"></div>
 
     <div class="vol keuze">
       <label><input type="checkbox" id="hero"> Op de opening (filmwand, alleen films)</label>
@@ -163,7 +172,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--navy);bo
     <div class="vol knoppen">
       <button class="knop oranje" type="submit" id="opslaan">Opslaan en publiceren</button>
       <button class="knop gevaar" type="button" id="verwijder" hidden>Verwijderen</button>
-      <span class="klein">Na publiceren staat het binnen 1 à 2 minuten op de site.</span>
+      <span class="klein">Na publiceren staat het binnen 2 à 3 minuten op de site.</span>
     </div>
   </form>
 </section>
@@ -184,7 +193,7 @@ const opslag = {
 };
 let TOKEN = opslag.get('tb-beheer-token') || '';
 let LIJST = [], gewijzigd = false, bewerkIndex = -1;
-let nieuwBestand = null, nieuwPoster = null; // {naam, blob}
+let nieuwBestand = null, nieuwPoster = null, nieuweDuur = null; // {naam, blob}
 
 function melding(tekst, soort){
   const s = $('status'); s.hidden = !tekst; s.textContent = tekst || ''; s.className = 'status' + (soort ? ' ' + soort : '');
@@ -274,7 +283,7 @@ function tekenLijst(){
       <div class="acties">
         <button class="knop licht mini" data-a="op" ${i === 0 ? 'disabled' : ''}>Omhoog</button>
         <button class="knop licht mini" data-a="neer" ${i === LIJST.length - 1 ? 'disabled' : ''}>Omlaag</button>
-        <a class="knop licht mini" href="${SITE}recept/?r=${encodeURIComponent(basis(it.bestand))}" target="_blank" rel="noopener">Bekijk</a>
+        <a class="knop licht mini" href="${SITE}recept/${encodeURIComponent(basis(it.bestand))}/" target="_blank" rel="noopener">Bekijk</a>
         <button class="knop mini" data-a="bewerk">Bewerken</button>
       </div>`;
     li.querySelectorAll('[data-v]').forEach(b => b.onclick = () => { it[b.dataset.v] = !it[b.dataset.v]; if (!it[b.dataset.v]) delete it[b.dataset.v]; markeer(); tekenLijst(); });
@@ -289,13 +298,13 @@ function tekenLijst(){
 function markeer(){ gewijzigd = true; $('volgorde-opslaan').disabled = false; }
 $('volgorde-opslaan').onclick = async () => {
   const k = $('volgorde-opslaan'); k.disabled = true;
-  try { await publiceer('Portfolio: volgorde en vinkjes', [{pad: DATA, blob: jsonBlob()}]); gewijzigd = false; melding('Opgeslagen. Over 1 à 2 minuten zichtbaar op de site.', 'goed'); tekenLijst(); }
+  try { await publiceer('Portfolio: volgorde en vinkjes', [{pad: DATA, blob: jsonBlob()}]); gewijzigd = false; melding('Opgeslagen. Over 2 à 3 minuten zichtbaar op de site.', 'goed'); tekenLijst(); }
   catch(e){ melding('Niet gelukt: ' + e.message, 'fout'); k.disabled = false; }
 };
 window.addEventListener('beforeunload', e => { if (gewijzigd) { e.preventDefault(); e.returnValue = ''; } });
 
 /* ===================== Formulier ===================== */
-const F = ['titel','tekst','waar','instagram','porties','tijd'];
+const F = ['titel','tekst','waar','instagram','porties','tijd','minuten','categorie','keuken','trefwoorden','seo_titel','seo_omschrijving','datum'];
 function soort(){ return document.querySelector('input[name=soort]:checked').value; }
 function zetSoort(s){
   document.querySelector(`input[name=soort][value=${s}]`).checked = true;
@@ -318,6 +327,7 @@ function openForm(i){
   $('ingredienten').value = (it.ingredienten || []).join('\n');
   $('bereiding').value = (it.bereiding || []).join('\n');
   $('hero').checked = !!it.hero; $('uitgelicht').checked = !!it.uitgelicht;
+  if (!it.datum) $('datum').value = new Date().toISOString().slice(0,10);
   $('verwijder').hidden = i < 0;
   $('posterkies').hidden = true;
   const v = $('voorbeeld');
@@ -364,6 +374,7 @@ $('bestand').onchange = async () => {
       v.innerHTML = `<video src="${URL.createObjectURL(f)}" muted playsinline preload="auto"></video>`;
       const video = v.querySelector('video');
       await new Promise((ok, fout) => { video.onloadeddata = ok; video.onerror = () => fout(new Error('Deze film kan de browser niet afspelen. Gebruik MP4 (H.264).')); });
+      const sec = Math.round(video.duration); nieuweDuur = 'PT' + (sec >= 60 ? Math.floor(sec/60) + 'M' : '') + (sec % 60 ? sec % 60 + 'S' : '');
       const r = $('poster-tijd'); r.max = video.duration.toFixed(1); r.value = (video.duration * .85).toFixed(1);
       $('posterkies').hidden = false;
       const zet = async () => { video.currentTime = +r.value; await new Promise(ok => video.onseeked = ok); nieuwPoster = await pakBeeld(video); };
@@ -402,8 +413,9 @@ $('form').onsubmit = async e => {
     bestanden.push({pad: MAP + it.bestand, blob: nieuwBestand.blob});
     if (it.soort === 'film') {
       delete it.voorbeeld; // nieuwe film: korte loop maakt Claude later; anders speelt de film zelf
+      if (nieuweDuur) it.duur = nieuweDuur;
       if (nieuwPoster) { it.poster = naam + '-poster.jpg'; bestanden.push({pad: MAP + it.poster, blob: nieuwPoster}); }
-    } else { delete it.poster; delete it.voorbeeld; }
+    } else { delete it.poster; delete it.voorbeeld; delete it.duur; }
   }
 
   if (nieuw) LIJST.unshift(it); else LIJST[bewerkIndex] = it;
@@ -413,7 +425,7 @@ $('form').onsubmit = async e => {
   try {
     await publiceer((nieuw ? 'Portfolio: nieuw ' : 'Portfolio: bijgewerkt ') + titel, bestanden);
     gewijzigd = false;
-    melding('Gepubliceerd. Over 1 à 2 minuten staat "' + titel + '" op de site.', 'goed');
+    melding('Gepubliceerd. Over 2 à 3 minuten staat "' + titel + '" op de site.', 'goed');
     tekenLijst(); toon('v-lijst');
   } catch(err){
     if (nieuw) LIJST.shift(); else LIJST[bewerkIndex] = oud;

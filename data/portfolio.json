@@ -9,7 +9,9 @@
     "instagram": "",
     "titel": "Baguette",
     "tekst": "Van deeg tot korst: vouwen, rollen, laten rijzen in linnen, insnijden en de oven in. Op het eind het moment waar het om draait: breken.",
-    "waar": "Film uit mijn keuken, 1:56"
+    "waar": "Film uit mijn keuken, 1:56",
+    "datum": "2026-11-02",
+    "duur": "PT1M56S"
   },
   {
     "soort": "foto",
@@ -18,7 +20,8 @@
     "bestand": "tortellini-flespompoen.jpg",
     "titel": "Tortellini met flespompoen, marjoraan en mascarpone",
     "tekst": "Vierkantjes vers pastadeeg met een toef vulling van flespompoen, mascarpone en marjoraan. Eronder de gevouwen tortellini op griesmeel, klaar voor de pan.",
-    "waar": "Uit mijn keuken"
+    "waar": "Uit mijn keuken",
+    "datum": "2026-11-13"
   },
   {
     "soort": "film",
@@ -30,7 +33,9 @@
     "instagram": "",
     "titel": "Carne cruda all'albese",
     "tekst": "De tartaar uit Alba in Piemonte. Vlees door de molen, aangemaakt met knoflook en olijfolie, in een ring op het bord en afgemaakt met citroen.",
-    "waar": "Film uit mijn keuken, 1:07"
+    "waar": "Film uit mijn keuken, 1:07",
+    "datum": "2026-07-16",
+    "duur": "PT1M7S"
   },
   {
     "soort": "film",
@@ -42,7 +47,9 @@
     "instagram": "",
     "titel": "Rode mul met aardappelschubben",
     "tekst": "Rode mul van de markt, met schubben van flinterdunne aardappel en een salsa van geblakerde tomaat. In de pan op de aardappelkant gebakken tot hij goudbruin is.",
-    "waar": "Film uit mijn keuken, 2:29"
+    "waar": "Film uit mijn keuken, 2:29",
+    "datum": "2026-10-27",
+    "duur": "PT2M29S"
   },
   {
     "soort": "film",
@@ -54,7 +61,9 @@
     "instagram": "",
     "titel": "Eclair au café",
     "tekst": "Soezendeeg spuiten en bakken, banketbakkersroom met koffie, vullen en glaceren. Aan het eind de proef.",
-    "waar": "Film uit mijn keuken, 1:30"
+    "waar": "Film uit mijn keuken, 1:30",
+    "datum": "2026-09-17",
+    "duur": "PT1M30S"
   },
   {
     "soort": "film",
@@ -66,7 +75,9 @@
     "instagram": "",
     "titel": "Kip tajine, m'qualli style",
     "tekst": "Kippenpoten met saffraan, gember en kurkuma, gestoofd in de pan met olijven en ingemaakte citroen.",
-    "waar": "Film uit mijn keuken, 1:07"
+    "waar": "Film uit mijn keuken, 1:07",
+    "datum": "2026-08-27",
+    "duur": "PT1M7S"
   },
   {
     "soort": "film",
@@ -78,7 +89,9 @@
     "instagram": "",
     "titel": "Kip met citroen en peper",
     "tekst": "Kippendijen gemarineerd in citroenrasp en gekneusde peper, krokant gebakken in de gietijzeren pan. Met geroosterde spitskool en een bonensalade.",
-    "waar": "Film uit mijn keuken, 0:32"
+    "waar": "Film uit mijn keuken, 0:32",
+    "datum": "2026-08-09",
+    "duur": "PT32S"
   },
   {
     "soort": "film",
@@ -90,7 +103,9 @@
     "instagram": "",
     "titel": "Tiramisu",
     "tekst": "Eieren en suiker luchtig geklopt, mascarpone erdoor, lange vingers gedrenkt in koffie. Laag op laag, en royaal cacao erover.",
-    "waar": "Film uit mijn keuken, 1:22"
+    "waar": "Film uit mijn keuken, 1:22",
+    "datum": "2026-06-18",
+    "duur": "PT1M22S"
   },
   {
     "soort": "film",
@@ -101,6 +116,8 @@
     "instagram": "",
     "titel": "Bonensalade met groene saus",
     "tekst": "Drie soorten bonen en mais, door een saus van peterselie en kruiden uit de blender. Makkelijk mee te nemen.",
-    "waar": "Film uit mijn keuken, 0:40"
+    "waar": "Film uit mijn keuken, 0:40",
+    "datum": "2026-07-11",
+    "duur": "PT40S"
   }
 ]

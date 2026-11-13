@@ -19,7 +19,7 @@ function toonPortfolio(LIJST){
   const tints = ['t1','t3','t2','t4'];
   const pad = f => f ? ROOT + 'assets/portfolio/' + f : '';
   const slug = it => String(it.bestand || '').replace(/\.[^.]+$/, '');
-  const receptUrl = it => ROOT + 'recept/?r=' + encodeURIComponent(slug(it));
+  const receptUrl = it => ROOT + 'recept/' + encodeURIComponent(slug(it)) + '/';
 
   function mediaInGrid(it){
     if (it.soort === 'film') {

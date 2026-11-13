@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /teunblankenberg/beheer/
+Sitemap: https://blankenbergteun.github.io/teunblankenberg/sitemap.xml

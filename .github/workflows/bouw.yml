@@ -1,0 +1,34 @@
+# Bouwt de site (scripts/bouw.py) en zet hem op GitHub Pages, bij elke wijziging op main.
+# Vereist: Settings → Pages → Source: "GitHub Actions".
+name: Bouw en publiceer
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  bouw:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.publiceer.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Pagina's bouwen
+        run: python3 scripts/bouw.py
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - name: Publiceren
+        id: publiceer
+        uses: actions/deploy-pages@v4
