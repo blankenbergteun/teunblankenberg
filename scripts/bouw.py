@@ -70,8 +70,9 @@ def page(path, title, desc, current, body, root, extra_head="", afbeelding="asse
 <header class="top">
   <a class="mark" href="{root or './'}" aria-label="{NAAM}, naar de homepage"><svg viewBox="0 0 1131 194" aria-hidden="true"><use href="{root}assets/tekeningen/naam-sprite.svg#logo"/></svg></a>
   <nav aria-label="Hoofdmenu">
+    {a('aanbod/', 'Aanbod', 'aanbod')}
     {a('portfolio/', 'Portfolio', 'portfolio')}
-    {a('over-mij/', 'Over mij', 'over')}
+    <span class="nav-over">{a('over-mij/', 'Over mij', 'over')}</span>
     <a class="cta" href="{root}aanvraag/"{cta_cur}><span class="lang">Doe een aanvraag</span><span class="kort">Aanvraag</span></a>
   </nav>
 </header>
@@ -83,6 +84,8 @@ def page(path, title, desc, current, body, root, extra_head="", afbeelding="asse
 <footer>
   <svg class="sig" viewBox="0 0 1131 194" role="img" aria-label="{NAAM}"><use href="{root}assets/tekeningen/naam-sprite.svg#logo"/></svg>
   <span>Private chef in Amsterdam</span>
+  <a href="{root}aanbod/">Aanbod</a>
+  <a href="{root}over-mij/">Over mij</a>
   <a href="{INSTAGRAM}" target="_blank" rel="noopener">Instagram</a>
   <a href="mailto:{EMAIL}">{EMAIL}</a>
   <span>KvK 00000000</span>
@@ -117,10 +120,28 @@ BEDRIJF = {
     "url": SITE_URL,
     "image": SITE_URL + "assets/teun.jpg",
     "email": EMAIL,
-    "areaServed": [{"@type": "City", "name": "Amsterdam"}, {"@type": "AdministrativeArea", "name": "Noord-Holland"}],
+    "areaServed": [{"@type": "Country", "name": "Nederland"}, {"@type": "City", "name": "Amsterdam"}],
     "founder": PERSOON,
     "knowsAbout": ["catering", "private dining", "private chef", "wijn-spijscombinaties"],
 }
+
+DIENSTEN = [
+    ("Catering", "Lunches en diners voor groepen vanaf 15 personen. Op kantoor, thuis of op een feestlocatie.", "Vanaf 15 personen"),
+    ("Private dining", "Een diner aan tafel, bij jou thuis of op een plek naar keuze. Het menu stellen we samen op.", "Bij jou thuis of op locatie"),
+    ("Private chef", "Ik kook voor jou en je gasten, voor één avond of voor meerdere dagen.", "Eén avond of langer"),
+]
+STAPPEN = [
+    ("Doe een aanvraag", "Vertel wat je in gedachten hebt: de datum, het aantal gasten en de gelegenheid."),
+    ("Je krijgt een offerte", "Met een menuvoorstel dat past bij je wensen en het seizoen."),
+    ("Ik kom koken", "Door heel Nederland. Eventuele reiskosten staan in de offerte."),
+]
+
+def diensten_html(kop="h3"):
+    return '<div class="diensten">' + "".join(
+        f'<article class="dienst"><{kop}>{e(t)}</{kop}><p>{e(d)}</p><p class="waar">{e(m)}</p></article>' for t, d, m in DIENSTEN) + "</div>"
+
+def stappen_html():
+    return '<ol class="werkwijze">' + "".join(f"<li><b>{e(t)}</b><span>{e(d)}</span></li>" for t, d in STAPPEN) + "</ol>"
 
 OVER_TEKST = '''<p>Ik ben opgegroeid in een culinair gezin, waar het leven zich aan tafel afspeelde. Zolang ik me kan herinneren, hielp ik mijn moeder in haar cateringbedrijf.</p>
         <p>Op mijn vijftiende begon ik als kok in een restaurant. Mijn chef was ooit leerling van Paul Bocuse, en zo werd de nouvelle cuisine mijn fundament. Daarna kookte ik in meerdere restaurants.</p>
@@ -142,11 +163,22 @@ home = f'''  <!-- Opening: de films met "opening" aangevinkt in de beheerpagina 
           <img class="l-cat" src="assets/tekeningen/regel-catering-oranje.svg" alt="">
           <img class="l-chef" src="assets/tekeningen/regel-chef-oranje.svg" alt="">
         </div>
-        <p class="where">Thuis of op locatie, in en rond Amsterdam</p>
+        <p class="where">Vanuit Amsterdam, door heel Nederland</p>
         <p class="links"><a class="knop" href="aanvraag/">Doe een aanvraag</a><a href="over-mij/">Over mij</a></p>
       </div>
     </div>
   </div>
+
+  <section aria-labelledby="aanbod-h">
+    <div class="intro">
+      <h2 id="aanbod-h">Wat ik doe</h2>
+      <p><a class="meer" href="aanbod/">Bekijk het aanbod</a></p>
+    </div>
+    {diensten_html()}
+    <h3 class="tussen">Zo werkt het</h3>
+    {stappen_html()}
+    <p class="na-stappen"><a class="knop" href="aanvraag/">Doe een aanvraag</a></p>
+  </section>
 
   <section aria-labelledby="werk-h">
     <div class="intro">
@@ -158,8 +190,32 @@ home = f'''  <!-- Opening: de films met "opening" aangevinkt in de beheerpagina 
 
 {band(r)}'''
 page("index.html", "Teun Blankenberg | Private chef en catering in Amsterdam",
-     "Private chef en catering in en rond Amsterdam. Diners aan huis, private dining en feesten op locatie, met seizoensgerechten en bijpassende wijnen.",
+     "Private chef en catering vanuit Amsterdam, door heel Nederland. Catering voor lunches en diners, private dining en private chef.",
      "home", home, r, extra_head=ld(BEDRIJF))
+
+# ---------- AANBOD ----------
+r = "../"
+ab = f'''  <section class="page-head" aria-labelledby="ab-h">
+    <div class="intro">
+      <h1 class="kop" id="ab-h">Aanbod</h1>
+      <p>Catering, private dining en private chef. Vanuit Amsterdam, door heel Nederland.</p>
+    </div>
+    {diensten_html("h2")}
+  </section>
+
+  <section aria-labelledby="zo-h">
+    <div class="intro">
+      <h2 id="zo-h">Zo werkt het</h2>
+    </div>
+    {stappen_html()}
+  </section>
+
+{band(r)}'''
+page("aanbod/index.html", "Aanbod: catering, private dining en private chef | Teun Blankenberg",
+     "Catering voor lunches en diners vanaf 15 personen, private dining en private chef. Vanuit Amsterdam, door heel Nederland.",
+     "aanbod", ab, r, extra_head=ld({"@context": "https://schema.org", "@type": "ItemList", "itemListElement": [
+         {"@type": "ListItem", "position": i + 1, "item": {"@type": "Service", "name": t, "description": d, "provider": {"@id": SITE_URL + "#bedrijf"}, "areaServed": "Nederland"}}
+         for i, (t, d, m) in enumerate(DIENSTEN)]}))
 
 # ---------- PORTFOLIO ----------
 r = "../"
@@ -183,7 +239,7 @@ om = f'''  <section class="page-head" aria-labelledby="over-h">
         <h1 class="kop" id="over-h">Over mij</h1>
         {OVER_TEKST}
         <dl class="facts">
-          <div><dt>Regio</dt><dd>Amsterdam en omgeving, verder in overleg</dd></div>
+          <div><dt>Regio</dt><dd>Vanuit Amsterdam, door heel Nederland</dd></div>
           <div><dt>Wijn</dt><dd>Bijpassende wijnen op aanvraag</dd></div>
         </dl>
       </div>

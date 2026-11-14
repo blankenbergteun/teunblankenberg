@@ -75,6 +75,21 @@ h1.kop,h2{font:400 clamp(44px,6vw,88px)/1 var(--hand);color:var(--navy)}
 .intro p{grid-column:9/13;max-width:34ch;color:var(--slate)}
 .meer{display:inline-block;margin-top:8px;font-size:16px;text-decoration-color:var(--signal);text-decoration-thickness:2px;text-underline-offset:5px}
 
+/* ---------- aanbod ---------- */
+.diensten{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,3vw,48px)}
+.dienst{border-top:2px solid var(--signal);padding-top:20px}
+.dienst h2,.dienst h3{font:400 clamp(32px,3.2vw,46px)/1.05 var(--hand);color:var(--navy);margin-bottom:14px}
+.dienst p{max-width:36ch;font-size:18px}
+.dienst .waar{margin-top:14px;font:400 13px/1.4 var(--type);color:var(--mist)}
+.tussen{font:400 clamp(30px,3vw,40px)/1.1 var(--hand);margin:clamp(56px,7vw,96px) 0 24px}
+.werkwijze{list-style:none;counter-reset:stap;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,3vw,48px)}
+.werkwijze li{counter-increment:stap;display:grid;grid-template-columns:auto 1fr;gap:4px 16px;align-content:start}
+.werkwijze li::before{content:counter(stap);grid-row:1/3;font:400 44px/1 var(--hand);color:var(--signal)}
+.werkwijze b{font-weight:400;font-size:19px}
+.werkwijze span{color:var(--slate);max-width:32ch}
+.na-stappen{margin-top:40px}
+.top nav .nav-over{display:contents}
+
 /* ---------- portfolio: overzicht met tekst bij elk beeld ---------- */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:clamp(36px,4vw,56px) clamp(20px,2.4vw,36px);align-items:start}
 .grid-4{grid-template-columns:repeat(4,1fr)}
@@ -193,6 +208,8 @@ footer .sig{height:32px;width:auto;fill:var(--navy);align-self:center}
   .about .portrait{justify-self:start}
   .label{margin:-56px 0 0}
   .mark svg{height:23px}
+  .diensten,.werkwijze{grid-template-columns:1fr}
+  .top nav .nav-over{display:none}
   .grid-4 .item h3{font-size:19px}
   .grid-4 .item p:not(.waar){display:none}
   .top nav{gap:14px;font-size:14px}
