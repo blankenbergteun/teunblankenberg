@@ -126,18 +126,34 @@ function headerState(){
 }
 addEventListener('scroll', headerState, {passive:true}); headerState();
 
-/* ---------- Aanvraag als e-mail ---------- */
+/* ---------- Aanvraag: verstuurt direct via Web3Forms (de sleutel is bedoeld om openbaar te zijn) ---------- */
+const WEB3FORMS = 'f2548072-d2c2-444d-8794-6ed233f47412';
 const form = document.getElementById('aanvraagformulier');
-if (form) form.addEventListener('submit', e => {
+if (form) form.addEventListener('submit', async e => {
   e.preventDefault();
-  const f = new FormData(form);
-  const body = [
-    'Naam: ' + f.get('naam'),
-    'E-mail: ' + f.get('mail'),
-    'Datum: ' + (f.get('datum') || 'nog niet bekend'),
-    'Aantal gasten: ' + (f.get('gasten') || '-'),
-    'Waar: ' + (f.get('plek') || '-'),
-    '', f.get('wens') || ''
-  ].join('\n');
-  location.href = 'mailto:hallo@teunblankenberg.nl?subject=' + encodeURIComponent('Aanvraag ' + (f.get('datum') || '')) + '&body=' + encodeURIComponent(body);
+  const f = new FormData(form), knop = form.querySelector('button[type=submit]'), uit = document.getElementById('form-status');
+  if (f.get('botcheck')) return; // onzichtbaar veld: alleen robots vullen dit in
+  knop.disabled = true; uit.className = 'form-status'; uit.textContent = 'Versturen…';
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST', headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+      body: JSON.stringify({
+        access_key: WEB3FORMS,
+        subject: 'Aanvraag via de website: ' + f.get('naam') + (f.get('datum') ? ' (' + f.get('datum') + ')' : ''),
+        from_name: 'Website Teun Blankenberg',
+        replyto: f.get('mail'),
+        Naam: f.get('naam'), 'E-mail': f.get('mail'), Telefoon: f.get('tel') || '-',
+        Datum: f.get('datum') || 'nog niet bekend', 'Aantal gasten': f.get('gasten') || '-',
+        Waar: f.get('plek') || '-', Gelegenheid: f.get('wens') || '-'
+      })
+    });
+    const j = await res.json();
+    if (!res.ok || !j.success) throw new Error(j.message || 'fout');
+    form.reset();
+    uit.className = 'form-status goed';
+    uit.textContent = 'Je aanvraag is verstuurd. Je hoort snel van mij.';
+  } catch (err) {
+    uit.className = 'form-status fout';
+    uit.textContent = 'Versturen is niet gelukt. Probeer het opnieuw, of stuur een WhatsApp-bericht.';
+  } finally { knop.disabled = false; }
 });

@@ -23,7 +23,9 @@ VANDAAG = datetime.date.today().isoformat()
 BASIS = urlparse(SITE_URL).path  # bijv. "/teunblankenberg/" of "/"
 NAAM = "Teun Blankenberg"
 INSTAGRAM = "https://www.instagram.com/"
-EMAIL = "hallo@teunblankenberg.nl"
+EMAIL = "teunblankenberg@gmail.com"
+WHATSAPP = "https://wa.me/31653230727"
+TELEFOON = "06 53 23 07 27"
 
 e = lambda s: html.escape(str(s or ""), quote=True)
 slug = lambda it: re.sub(r"\.[^.]+$", "", it.get("bestand", ""))
@@ -87,6 +89,7 @@ def page(path, title, desc, current, body, root, extra_head="", afbeelding="asse
   <a href="{root}aanbod/">Aanbod</a>
   <a href="{root}over-mij/">Over mij</a>
   <a href="{INSTAGRAM}" target="_blank" rel="noopener">Instagram</a>
+  <a href="{WHATSAPP}" target="_blank" rel="noopener">WhatsApp</a>
   <a href="mailto:{EMAIL}">{EMAIL}</a>
   <span>KvK 00000000</span>
 </footer>
@@ -120,6 +123,7 @@ BEDRIJF = {
     "url": SITE_URL,
     "image": SITE_URL + "assets/teun.jpg",
     "email": EMAIL,
+    "telephone": "+31653230727",
     "areaServed": [{"@type": "Country", "name": "Nederland"}, {"@type": "City", "name": "Amsterdam"}],
     "founder": PERSOON,
     "knowsAbout": ["catering", "private dining", "private chef", "wijn-spijscombinaties"],
@@ -261,12 +265,18 @@ av = f'''  <section class="navy aanvraag" aria-labelledby="aanvraag-h">
       <form id="aanvraagformulier">
         <div class="field"><label for="naam">Naam</label><input id="naam" name="naam" autocomplete="name" required></div>
         <div class="field"><label for="mail">E-mail</label><input id="mail" name="mail" type="email" autocomplete="email" required></div>
+        <div class="field wide"><label for="tel">Telefoon (optioneel)</label><input id="tel" name="tel" type="tel" autocomplete="tel"></div>
         <div class="field"><label for="datum">Datum</label><input id="datum" name="datum" type="date"></div>
         <div class="field"><label for="gasten">Aantal gasten</label><input id="gasten" name="gasten" type="number" min="1" inputmode="numeric"></div>
         <div class="field wide"><label for="plek">Waar</label><input id="plek" name="plek" placeholder="Thuis, op kantoor, buiten…"></div>
         <div class="field wide"><label for="wens">Wat voor gelegenheid?</label><textarea id="wens" name="wens"></textarea></div>
-        <button class="knop" type="submit">Verstuur aanvraag</button>
-        <p class="form-note">Je mailprogramma opent met je aanvraag erin. Liever direct mailen: <a href="mailto:{EMAIL}">{EMAIL}</a></p>
+        <input type="checkbox" name="botcheck" class="vh" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="form-knoppen">
+          <button class="knop" type="submit">Verstuur aanvraag</button>
+          <a class="knop-lijn" href="{WHATSAPP}" target="_blank" rel="noopener">Stuur een WhatsApp</a>
+        </div>
+        <p class="form-status" id="form-status" role="status"></p>
+        <p class="form-note">Liever bellen of mailen? {TELEFOON} of <a href="mailto:{EMAIL}">{EMAIL}</a></p>
       </form>
     </div>
   </section>'''
