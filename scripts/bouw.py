@@ -98,13 +98,15 @@ def page(path, title, desc, current, body, root, extra_head="", afbeelding="asse
 </body>
 </html>
 '''
-    schrijf(path, out)
+    schrijf(path, out.replace('{ROOT}', root))
     if sitemap:
         gebouwd.append((url, lastmod or VANDAAG))
 
 
 def band(root, titel="Zin in een diner?", tekst="Vertel kort wat je in gedachten hebt. Je krijgt binnen twee dagen een voorstel met menu en prijs."):
+    fries = "".join(tek(n, 52) for n in ALLE_TEKENINGEN)
     return f'''  <section class="navy band" aria-labelledby="band-h">
+    <div class="fries">{fries}</div>
     <h2 id="band-h">{titel}</h2>
     <div class="rechts">
       <p>{tekst}</p>
@@ -129,6 +131,15 @@ BEDRIJF = {
     "knowsAbout": ["catering", "private dining", "private chef", "wijn-spijscombinaties"],
 }
 
+def tek(naam, hoogte, klasse=""):
+    """Een losse tekening als masker, zodat hij elke kleur kan krijgen."""
+    vb = re.search(r'viewBox="([^"]+)"', open(OUT + f"assets/tekeningen/los/{naam}.svg").read()).group(1).split()
+    b = round(hoogte * float(vb[2]) / float(vb[3]))
+    return f'<span class="tek {klasse}" style="-webkit-mask-image:url({{ROOT}}assets/tekeningen/los/{naam}.svg);mask-image:url({{ROOT}}assets/tekeningen/los/{naam}.svg);width:{b}px;height:{hoogte}px" aria-hidden="true"></span>'
+
+ALLE_TEKENINGEN = ["doos", "wijnglas", "vork", "plank", "knijpfles", "bord", "kippenpoot", "weckpot", "boter", "vis", "pan", "kip", "neus"]
+DIENST_TEKENING = {"Catering": "doos", "Private dining": "bord", "Private chef": "pan"}
+
 DIENSTEN = [
     ("Catering", "Lunches en diners voor groepen vanaf 15 personen. Op kantoor, thuis of op een feestlocatie.", "Vanaf 15 personen"),
     ("Private dining", "Een diner aan tafel, bij jou thuis of op een plek naar keuze. Het menu stellen we samen op.", "Bij jou thuis of op locatie"),
@@ -142,7 +153,7 @@ STAPPEN = [
 
 def diensten_html(kop="h3"):
     return '<div class="diensten">' + "".join(
-        f'<article class="dienst"><{kop}>{e(t)}</{kop}><p>{e(d)}</p><p class="waar">{e(m)}</p></article>' for t, d, m in DIENSTEN) + "</div>"
+        f'<article class="dienst">{tek(DIENST_TEKENING[t], 84)}<{kop}>{e(t)}</{kop}><p>{e(d)}</p><p class="waar">{e(m)}</p></article>' for t, d, m in DIENSTEN) + "</div>"
 
 def stappen_html():
     return '<ol class="werkwijze">' + "".join(f"<li><b>{e(t)}</b><span>{e(d)}</span></li>" for t, d in STAPPEN) + "</ol>"
@@ -154,24 +165,21 @@ OVER_TEKST = '''<p>Ik ben opgegroeid in een culinair gezin, waar het leven zich 
 
 # ---------- HOME ----------
 r = ""
-home = f'''  <!-- Opening: de films met "opening" aangevinkt in de beheerpagina (/beheer/) -->
-  <div class="filmwand navy" id="filmwand" aria-label="Films uit mijn keuken"></div>
-
-  <div class="hero intro-sec navy">
-    <div class="duo">
-      <div class="portret t1"><img src="assets/teun.jpg" alt="Teun Blankenberg in de keuken" onerror="this.remove()"><div class="ph">foto van jou aan het werk</div></div>
-      <div class="label">
-        <h1 class="vh">Teun Blankenberg: catering, private dining en private chef in Amsterdam</h1>
-        <img class="title" src="assets/tekeningen/regel-naam-wit.svg" alt="" aria-hidden="true">
-        <div class="sub" aria-hidden="true">
-          <img class="l-cat" src="assets/tekeningen/regel-catering-oranje.svg" alt="">
-          <img class="l-chef" src="assets/tekeningen/regel-chef-oranje.svg" alt="">
-        </div>
-        <p class="where">Vanuit Amsterdam, door heel Nederland</p>
-        <p class="links"><a class="knop" href="aanvraag/">Doe een aanvraag</a><a href="over-mij/">Over mij</a></p>
+home = f'''  <div class="hero foto navy">
+    <div class="label">
+      <h1 class="vh">Teun Blankenberg: catering, private dining en private chef</h1>
+      <img class="title" src="assets/tekeningen/regel-naam-wit.svg" alt="" aria-hidden="true">
+      <div class="sub" aria-hidden="true">
+        <img class="l-cat" src="assets/tekeningen/regel-catering-oranje.svg" alt="">
+        <img class="l-chef" src="assets/tekeningen/regel-chef-oranje.svg" alt="">
       </div>
+      <p class="where">Vanuit Amsterdam, door heel Nederland</p>
+      <p class="links"><a class="knop" href="aanvraag/">Doe een aanvraag</a><a href="aanbod/">Bekijk het aanbod</a></p>
     </div>
   </div>
+
+  <!-- De films met "opening" aangevinkt in de beheerpagina (/beheer/) -->
+  <div class="filmwand navy" id="filmwand" aria-label="Films uit mijn keuken"></div>
 
   <section aria-labelledby="aanbod-h">
     <div class="intro">
@@ -408,7 +416,7 @@ schrijf("recept/index.html", '''<!doctype html><html lang="nl"><head><meta chars
 schrijf("404.html", '''<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="robots" content="noindex">
 <title>Niet gevonden | Teun Blankenberg</title>
 <style>body{font:18px/1.6 "Helvetica Neue",Arial,sans-serif;background:#F4F2EF;color:#213E60;display:grid;place-items:center;min-height:100vh;margin:0;text-align:center;padding:20px}</style>
-</head><body><div><p>Deze pagina bestaat niet (meer), of wordt nog gebouwd. Probeer het over een minuut opnieuw.</p>
+</head><body><div><p>Ik ruik hier niets. Deze pagina bestaat niet (meer), of wordt nog gebouwd. Probeer het over een minuut opnieuw.</p>
 <p><a href="''' + BASIS + '''portfolio/">Naar het portfolio</a></p></div></body></html>
 ''')
 

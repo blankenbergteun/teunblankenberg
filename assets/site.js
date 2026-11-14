@@ -122,7 +122,10 @@ const bar = document.querySelector('.top');
 const blauw = [...document.querySelectorAll('.navy')];
 function headerState(){
   const y = bar.offsetHeight / 2;
-  bar.classList.toggle('on-navy', blauw.some(el => { const r = el.getBoundingClientRect(); return r.top < y && r.bottom > y; }));
+  const foto = document.querySelector('.hero.foto');
+  const opFoto = !!foto && foto.getBoundingClientRect().bottom > y;
+  bar.classList.toggle('op-foto', opFoto);
+  bar.classList.toggle('on-navy', !opFoto && blauw.some(el => { const r = el.getBoundingClientRect(); return r.top < y && r.bottom > y; }));
 }
 addEventListener('scroll', headerState, {passive:true}); headerState();
 
