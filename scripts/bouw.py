@@ -139,11 +139,11 @@ home = f'''  <!-- Opening: de films met "opening" aangevinkt in de beheerpagina 
         <h1 class="vh">Teun Blankenberg: catering, private dining en private chef in Amsterdam</h1>
         <img class="title" src="assets/tekeningen/regel-naam-wit.svg" alt="" aria-hidden="true">
         <div class="sub" aria-hidden="true">
-          <img class="l-cat" src="assets/tekeningen/regel-catering-wit.svg" alt="">
-          <img class="l-chef" src="assets/tekeningen/regel-chef-wit.svg" alt="">
+          <img class="l-cat" src="assets/tekeningen/regel-catering-oranje.svg" alt="">
+          <img class="l-chef" src="assets/tekeningen/regel-chef-oranje.svg" alt="">
         </div>
         <p class="where">Thuis of op locatie, in en rond Amsterdam</p>
-        <p class="links"><a href="over-mij/">Over mij</a><a href="aanvraag/">Doe een aanvraag</a></p>
+        <p class="links"><a class="knop" href="aanvraag/">Doe een aanvraag</a><a href="over-mij/">Over mij</a></p>
       </div>
     </div>
   </div>
