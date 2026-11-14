@@ -12,7 +12,7 @@
   --signal:#E68C3A;   /* oranje, spaarzaam: knoppen en hoofdlink */
   --line:#E0DBD3;
   --slate:#4A6283;
-  --mist:#7A8AA0;
+  --mist:#56677F;
   --gutter:clamp(16px,4vw,56px);
   --hand:"Jacobs Doodles","Alte Haas Grotesk",sans-serif;
   --body:"Alte Haas Grotesk","Helvetica Neue",Arial,sans-serif;
@@ -91,7 +91,7 @@ h1.kop,h2{font:400 clamp(44px,6vw,88px)/1 var(--hand);color:var(--navy)}
 .t3 .ph{background:linear-gradient(140deg,#4d6d93,#1a3350)}
 .t4 .ph{background:linear-gradient(180deg,#213E60,#13263c)}
 .soort{position:absolute;top:12px;right:12px;z-index:2;font:400 12px/1 var(--type);background:var(--snow);color:var(--navy);padding:5px 7px}
-.item h3{font:400 26px/1.1 var(--hand);margin-top:14px}
+.item h3{font:400 26px/1.1 var(--hand);margin-top:14px;text-wrap:balance}
 .item p{margin-top:6px;font-size:16px;line-height:1.55;max-width:46ch}
 .item .waar{margin-top:8px;font:400 13px/1.4 var(--type);color:var(--mist)}
 
@@ -147,7 +147,7 @@ dialog::backdrop{background:rgba(19,38,60,.94)}
 /* ---------- marineblauwe vlakken ---------- */
 .navy{background-color:var(--navy);background-image:url(papier-blauw.jpg);background-size:512px;color:var(--snow)}
 /* opening: tekeningen bovenop het papier */
-.hero.navy{background-image:url(tekeningen/iconen-wit.svg),url(papier-blauw.jpg);background-size:clamp(420px,52vw,780px) auto,512px;background-repeat:repeat}
+.hero.navy{background-image:url(tekeningen/iconen-zacht.svg),url(papier-blauw.jpg);background-size:clamp(340px,40vw,600px) auto,512px;background-repeat:repeat}
 .navy h1.kop,.navy h2{color:var(--snow)}
 .band{margin-top:clamp(80px,11vw,150px);padding-top:clamp(64px,8vw,110px);padding-bottom:clamp(64px,8vw,110px);display:grid;grid-template-columns:repeat(12,1fr);gap:28px 24px;align-items:end}
 .band h2{grid-column:1/8}
@@ -193,6 +193,8 @@ footer .sig{height:32px;width:auto;fill:var(--navy);align-self:center}
   .about .portrait{justify-self:start}
   .label{margin:-56px 0 0}
   .mark svg{height:23px}
+  .grid-4 .item h3{font-size:19px}
+  .grid-4 .item p:not(.waar){display:none}
   .top nav{gap:14px;font-size:14px}
   .top nav .lang{display:none}
   .top nav .kort{display:inline}
